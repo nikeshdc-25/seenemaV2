@@ -1,0 +1,108 @@
+body {
+    background-color: rgb(39, 39, 39);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 20px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.middle{
+    border-bottom: 1px solid rgb(101, 31, 86);
+    padding-bottom: 20px;
+}
+
+h1 {
+    background-image: linear-gradient(to top, #131417, rgb(139, 24, 185));
+    color: #ececec;
+    box-shadow: 0 4px 8px rgba(2, 2, 2, 2);
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.img-fluid {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(2, 2, 2, 1);
+}
+
+p {
+    padding: 2px 8px;
+    color:#ffffff;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.btn-success {
+    border: none;
+    box-shadow: 0 4px 8px rgba(2, 2, 2, 0.3);
+    width: 7rem;
+    background-image: linear-gradient(to top, #2e392f, #1bef1f);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+.btn-primary{
+    margin: 10px;
+}
+
+.btn-success:hover {
+    box-shadow: 0 4px 8px rgb(0, 0, 0);
+    transform: translateX(5px);
+}
+
+.row {
+    margin-top: 20px;
+    position: relative;
+}
+x{
+    font-size: 16px;
+    font-weight: 150;
+}
+.user-feedback {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.user-feedback .feedback-column {
+    margin-bottom: 20px;
+    padding-right: 15px;
+}
+
+h2 {
+    margin: 30px 0;
+    font-size: 1.5rem;
+    color: #d1d1d1;
+}
+
+strong {
+    padding: 2px 8px;
+    background-color:#894aaa;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(2, 2, 2, 0.5);
+}
+
+
+/*----------------Responsive CSS----------------------------------------------*/
+
+@media (max-width: 768px) {
+    .row.mt-4 {
+        flex-direction: column;
+    }
+
+    .col-md-6 {
+        width: 100%;
+    }
+
+    .user-feedback .feedback-column {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-right: 0; 
+    }
+}

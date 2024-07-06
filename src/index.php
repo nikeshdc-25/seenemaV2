@@ -12,6 +12,21 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="index.css">
+    <style>
+    .favorite-icon {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: white;
+        font-size: 24px;
+        z-index: 1;
+        cursor: pointer;
+        transition: all 0.1s ease;
+    }
+    .favorite-icon:hover{
+        font-size: 27px;
+    }
+    </style>
 </head>
 <body id="top">
     <header class="d-flex align-items-center justify-content-left logo-container">
@@ -23,6 +38,7 @@ session_start();
         <button class="curved-button" id="featuredButton" title="Feature">Featured Movie</button>
         <button class="curved-button" id="latestButton" title="Latest">Latest</button>
         <button class="curved-button" id="allMoviesButton" title="All Movies">All Movies</button>
+        <button class="curved-button" id="favMoviesButton" title="Favorites">Favorites</button>
         <button id="filterButton" class="curved-button filter-toggle" type="button">Filter</button>           
         <div class="search-container d-flex align-items-center">
             <input type="text" id="quickSearchInput" class="form-control me-2" placeholder="Quick Search..." aria-label="Search">
@@ -274,9 +290,62 @@ session_start();
         const movieTitle = document.getElementById('movieTitle');
         const quickSearchInput = document.getElementById('quickSearchInput');
         const quickSearchButton = document.getElementById('quickSearchButton');
+        const favMoviesButton = document.getElementById('favMoviesButton');
+        let userFavorites = [];
 
 
+        function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
 
+        // Set styles to make sure it shows up
+        notification.style.position = 'fixed';
+        notification.style.top = '20px';
+        notification.style.left = '50%';
+        notification.style.transform = 'translateX(-50%)';
+        notification.style.backgroundColor = type === 'success' ? '#4CAF50' : '#f44336';
+        notification.style.color = '#fff';
+        notification.style.padding = '10px 20px';
+        notification.style.width = '15rem';
+        notification.style.borderRadius = '5px';
+        notification.style.zIndex = '9999';
+        notification.style.opacity = '1';
+        notification.style.transition = 'opacity 0.3s ease';
+
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            progressBar.style.width = '0';
+        }, 0);
+
+        setTimeout(function() {
+            notification.style.opacity = '0';
+            setTimeout(function() {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 1500);
+    }
+
+        function fetchUserFavorites() {
+        return fetch('../movies/favoriteMovie.php')
+            .then(response => response.json())
+            .then(data => {
+                userFavorites = data.map(favorite => favorite.movieID);
+            })
+            .catch(error => {
+                console.error('Error fetching user favorites:', error);
+                userFavorites = [];
+            });
+        }
+
+        fetchUserFavorites()
+            .then(() => fetchMoviesFromFetchMoviesPHP())
+            .catch(error => console.error('Error initializing:', error));
+
+
+        //For Message:
         function updateMovieTitle(title) {
             movieTitle.innerHTML = `<i class="fas fa-film"></i> ${title}`;
             movieTitleContainer.style.display = 'flex';
@@ -360,7 +429,7 @@ session_start();
                 .catch(error => console.error('Error fetching latest movies from latest.php:', error));
         }
 
-        // Function to fetch movies based on search term
+        // For Search Button:
         quickSearchButton.addEventListener('click', function() {
             const searchTerm = quickSearchInput.value.trim();
             if (searchTerm !== '') {
@@ -398,10 +467,52 @@ session_start();
                 .catch(error => console.error('Error fetching movies from quickSearch.php:', error));
         }
 
+        // For Favorite Movies:
+        favMoviesButton.addEventListener('click', function() {
+            fetch('../movies/favoriteMovie.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'error' && data.message === 'User not logged in') {
+                        movieContainer.innerHTML = `<p style="color: red; font-size: 30px; font-weight: 600;">No favorite movies found!</p>`;
+                        paginationContainer.style.visibility = 'hidden';
+                    } else {
+                        movieContainer.innerHTML = '';
+                        if (data.length === 0) {
+                            movieContainer.innerHTML = `<p style="color: red; font-size: 30px; font-weight: 600;">No favorite movies found!</p>`;
+                            paginationContainer.style.visibility = 'hidden';
+                            return;
+                        }
+                        data.forEach(movie => {
+                            const movieCard = createMovieCard(movie);
+                            movieContainer.appendChild(movieCard);
+                        });
+                        updateMovieTitle('Favorites');
+                        paginationContainer.style.visibility = 'hidden';
+                    }
+                })
+                .catch(error => console.error('Error fetching favorite movies:', error));
+        });
+
         //For movie cards:
         function createMovieCard(movie) {
             const movieCard = document.createElement('div');
             movieCard.classList.add('movie-card');
+            movieCard.setAttribute('data-movie-id', movie.movieID);
+
+            // Favorite icon
+            const favoriteIcon = document.createElement('i');
+            favoriteIcon.classList.add('fa-solid', 'fa-heart', 'favorite-icon');
+            if (userFavorites.includes(movie.movieID)) {
+                favoriteIcon.style.color = 'red';
+            }
+            if (movie.is_favorite) {
+                favoriteIcon.style.color = 'red';
+            }
+            favoriteIcon.addEventListener('click', function(event) {
+                event.stopPropagation();
+                toggleFavorite(movie.movieID, favoriteIcon);
+            });
+            movieCard.appendChild(favoriteIcon);
 
             const img = document.createElement('img');
             img.src = movie.poster;
@@ -429,6 +540,39 @@ session_start();
             });
 
             return movieCard;
+        }
+
+        //For Favorite Icon Toggle function
+        function toggleFavorite(movieID, favoriteIcon) {
+            fetch('../movies/favorites.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `movieID=${encodeURIComponent(movieID)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'error') {
+                showNotification('You need to log in!', 'error');
+                } 
+                else {
+                if (data.status === 'success') {
+                    if (data.action === 'added') {
+                        favoriteIcon.style.color = 'red';
+                        showNotification('Favorite Movie Added!', 'success');
+                        userFavorites.push(movieID);
+                    } else if (data.action === 'removed') {
+                        favoriteIcon.style.color = '';
+                        showNotification('Favorite Movie Removed!', 'error');
+                        userFavorites = userFavorites.filter(id => id !== movieID);
+                    }
+                } else {
+                    console.error(data.message);
+                }
+            }
+            })
+            .catch(error => console.error('Error toggling favorite:', error));
         }
 
         //Initial Movies Display:
@@ -496,9 +640,9 @@ session_start();
                 event.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-        </script>
-        <script src="index.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    </script>
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

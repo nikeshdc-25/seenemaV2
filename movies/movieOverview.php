@@ -103,7 +103,7 @@ $conn->close();
     color: #fff;
     text-align: center;
     width: 100%;
-    max-width: 550px;
+    max-width: 450px;
     align-items: center;
     justify-content: center;
     overflow: visible;
@@ -150,6 +150,7 @@ background-color: rgb(39, 39, 39);
     color: #f1c40f;
 }
 
+/*Rating Stars:*/
 .stars {
     display: flex;
     justify-content: center;
@@ -157,6 +158,7 @@ background-color: rgb(39, 39, 39);
     position: absolute;
     top: -20px;
     left: 50%;
+    direction: rtl;
     transform: translateX(-50%);
     color: #666;
 }
@@ -165,25 +167,28 @@ background-color: rgb(39, 39, 39);
     display: none;
 }
 
-.stars label {
-    font-size: 2rem;
-    color: #666;
+.star {
+    font-size: 2em;
+    color: gray;
     cursor: pointer;
-    margin: 0 5px;
     transition: color 0.3s;
 }
 
-.stars input[type="radio"] ~ label {
+.star:hover,
+.star:hover ~ .star {
     color: #0ff113;
 }
+
+input[type="radio"]:checked ~ label.star {
+    color: #0ff113;
+}
+
 .stars label:hover {
     transform: scale(1.5);
 }
-
-.stars label:hover,
-.stars label:hover ~ label,
-.stars input[type="radio"]:checked ~ label ~ label  {
-    color: #666;
+input[type="radio"]:checked ~ label.star:hover,
+input[type="radio"]:checked ~ label.star:hover ~ .star {
+    color: #0ff113;
 }
 
 #review_title, #userReview {
@@ -265,7 +270,7 @@ background-color: rgb(39, 39, 39);
     <div id="rating-container">
         <button class="close-button" onclick="closeRatingPopup()"><i class="fas fa-times"></i></button>
         <div class="stars">
-            <?php for ($i = 1; $i <= 10; $i++): ?>
+            <?php for ($i = 10; $i >= 1; $i--): ?>
                 <input type="radio" name="rating" id="star<?php echo $i; ?>" value="<?php echo $i; ?>" onclick="setRating(<?php echo $i; ?>)">
                 <label class="star fas fa-star" for="star<?php echo $i; ?>"></label>
             <?php endfor; ?>

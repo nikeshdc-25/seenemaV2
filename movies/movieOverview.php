@@ -285,7 +285,7 @@ input[type="radio"]:checked ~ label.star:hover ~ .star {
             <h2>❤️ User Reviews</h2>
             <?php foreach ($reviews as $review): ?>
                 <div class="review-container">
-                    <strong>Reviewed by: <?php echo htmlspecialchars($review['userName']); ?> - ❤️ <?php echo (int)$review['user_rating']; ?>/10</strong>
+                    <strong class="rounded-pill">Reviewed by: <?php echo htmlspecialchars($review['userName']); ?> - ❤️ <?php echo (int)$review['user_rating']; ?>/10</strong>
                     <p style="font-weight:500; font-size:20px;"><?php echo htmlspecialchars($review['review_title']); ?></p>
                     <?php 
                     $reviewText = htmlspecialchars($review['user_review']);

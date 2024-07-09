@@ -9,7 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seenema</title>
     <link rel="icon" href="../seenema_img/seenemaLogo.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="index.css">
     <style>
@@ -297,8 +297,6 @@ session_start();
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
         notification.textContent = message;
-
-        // Set styles to make sure it shows up
         notification.style.position = 'fixed';
         notification.style.top = '20px';
         notification.style.left = '50%';
@@ -314,10 +312,6 @@ session_start();
 
 
         document.body.appendChild(notification);
-
-        setTimeout(() => {
-            progressBar.style.width = '0';
-        }, 0);
 
         setTimeout(function() {
             notification.style.opacity = '0';

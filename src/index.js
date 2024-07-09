@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const forgetLinks = document.querySelectorAll('.forget');
     const filterToggle = document.querySelector('.filter-toggle');
     const filterBar = document.querySelector('.filter-bar');
+    
 
     function showNotification(message, type) {
         const notification = document.createElement('div');

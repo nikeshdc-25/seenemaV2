@@ -75,7 +75,7 @@ main {
 .movie-card img {
     width: 100%;
     height: 16rem;
-    object-fit:fill;
+    object-fit: fill;
 }
 
 .movie-title {
@@ -129,28 +129,16 @@ main {
     display: flex;
 }
 
-
-/*Message for Movies Button*/
-#movieTitleContainer {
-    margin-top: 10px;
-    margin-bottom: -50px;
-    justify-content: center;
-    border-radius: 50px;
+/*For Search Message*/
+.search-message {
+    color: rgb(165, 165, 165);
+    font-size: 20px;
+    font-family: cursive;
+    text-align: center;
+    width: 100%;
+    margin-bottom: -20px;
 }
 
-#movieTitle {
-    font-size: 24px;
-    font-family: monospace;
-    font-weight: 600;
-    display: flex; 
-    align-items: center;
-    margin-right: 20px;
-    background-image: linear-gradient(to left, #35ca0c, #1130ca);
-}
-
-#movieTitle i {
-    margin-right: 10px;
-}
 
 /* For Pagination Element */
 .pagination-container {
@@ -315,6 +303,11 @@ main {
 
 .curved-button:hover::after {
     left: 100%;
+}
+
+.curved-button.active {
+    background-image: linear-gradient(to top, #d900ff, #8017a3);
+    color: #ffffff;
 }
 
 .search-container input[type="text"] {
@@ -717,7 +710,7 @@ input {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     align-items: center;
     justify-content: center;
-    z-index: 1;
+    z-index: 10;
 }
 
 .user-menu p {

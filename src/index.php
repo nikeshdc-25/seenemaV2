@@ -59,7 +59,8 @@ session_start();
         <?php else: ?>
             <button class="curved-button signup-button" title="Login">Login</button>
         <?php endif; ?>
-        </aside>
+    </aside>
+
     <div class="filter-bar">
         <nav class="d-flex align-items-center justify-content-center flex-wrap">
             <div class="form-group">
@@ -155,9 +156,6 @@ session_start();
         </nav>
     </div>
     <main class="col-12">
-        <div id="movieTitleContainer" class="d-flex align-items-center" style="display: none;">
-            <h2 id="movieTitle" class="ms-2"></h2>
-        </div>
         <div class="movie-container d-flex justify-content-center flex-wrap"></div>
         <div class="pagination-container"></div>
         <!--Login Form-->
@@ -285,12 +283,11 @@ session_start();
         const userMessage = document.getElementById('userMessage');
         const logoutButton = document.getElementById('logoutButton');
         const paginationContainer = document.querySelector('.pagination-container');
-        const movieTitleContainer = document.getElementById('movieTitleContainer');
-        const movieTitle = document.getElementById('movieTitle');
         const quickSearchInput = document.getElementById('quickSearchInput');
         const quickSearchButton = document.getElementById('quickSearchButton');
         const favMoviesButton = document.getElementById('favMoviesButton');
-        let userFavorites = [];
+        const buttons = document.querySelectorAll('.button-container .curved-button');
+        let userFavorites = []
 
 
         function showNotification(message, type) {
@@ -321,6 +318,14 @@ session_start();
         }, 1500);
     }
 
+        // Add click event listener to each button
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                buttons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
         function fetchUserFavorites() {
         return fetch('../movies/favoriteMovie.php')
             .then(response => response.json())
@@ -336,13 +341,6 @@ session_start();
         fetchUserFavorites()
             .then(() => fetchMoviesFromFetchMoviesPHP())
             .catch(error => console.error('Error initializing:', error));
-
-
-        //For Message:
-        function updateMovieTitle(title) {
-            movieTitle.innerHTML = `${title}`;
-            movieTitleContainer.style.display = 'flex';
-        }
 
         //Pagination Starts here:
         function fetchMoviesFromFetchMoviesPHP(page = 1) {
@@ -384,7 +382,6 @@ session_start();
                         const movieCard = createMovieCard(movie);
                         movieContainer.appendChild(movieCard);
                     });
-                    updateMovieTitle(`<i class="fa-solid fa-arrow-down-a-z"></i> All Movies`);
                     paginationContainer.style.visibility = 'hidden'; // Hide pagination for all movies
                 })
                 .catch(error => console.error('Error fetching all movies from allMovie.php:', error));
@@ -400,7 +397,6 @@ session_start();
                         const movieCard = createMovieCard(movie);
                         movieContainer.appendChild(movieCard);
                     });
-                    updateMovieTitle('<i class="fa-solid fa-fire"></i> Featured Movies');
                     paginationContainer.style.visibility = 'hidden';
                 })
                 .catch(error => console.error('Error fetching featured movies from featureMovie.php:', error));
@@ -416,7 +412,6 @@ session_start();
                         const movieCard = createMovieCard(movie);
                         movieContainer.appendChild(movieCard);
                     });
-                    updateMovieTitle('<i class="fa-solid fa-rocket"></i> Latest Movies');
                     paginationContainer.style.visibility = 'hidden';
                 })
                 .catch(error => console.error('Error fetching latest movies from latest.php:', error));
@@ -445,20 +440,29 @@ session_start();
                 .then(response => response.json())
                 .then(data => {
                     movieContainer.innerHTML = '';
+                    const searchMessage = document.createElement('p');
+                    searchMessage.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i> Quick Search: <span style='background-color:white; color: black; padding: 0 5px;'>${searchTerm}</span>`;
+                    searchMessage.classList.add('search-message');
+
+                    movieContainer.appendChild(searchMessage);
+
                     if (data.length === 0) {
-                        movieContainer.innerHTML = `<p style="color: red; font-size: 30px; font-weight: 700;">No movies found!</p>`;
+                        movieContainer.innerHTML += `<p style="color: red; font-size: 30px; font-weight: 700;">No movies found!</p>`;
                         paginationContainer.style.visibility = 'hidden';
                         return;
                     }
+
                     data.forEach(movie => {
                         const movieCard = createMovieCard(movie);
                         movieContainer.appendChild(movieCard);
                     });
-                    updateMovieTitle(`Quick Search:<span style="background-color: rgb(39, 39, 39); font-weight:">${searchTerm}</span>`);
+
                     paginationContainer.style.visibility = 'hidden';
                 })
                 .catch(error => console.error('Error fetching movies from quickSearch.php:', error));
         }
+
+
 
         // For Favorite Movies:
         favMoviesButton.addEventListener('click', function() {
@@ -479,7 +483,6 @@ session_start();
                             const movieCard = createMovieCard(movie);
                             movieContainer.appendChild(movieCard);
                         });
-                        updateMovieTitle('<i class="fa-solid fa-heart"></i> Favorites');
                         paginationContainer.style.visibility = 'hidden';
                     }
                 })
@@ -575,7 +578,8 @@ session_start();
         const homeButton = document.getElementById('homeButton');
         if (homeButton) {
             homeButton.addEventListener('click', ()=>{
-                window.location.href = "index.php";
+                fetchMoviesFromFetchMoviesPHP();
+                paginationContainer.style.visibility = 'visible';
             });
         }
 

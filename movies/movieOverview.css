@@ -37,13 +37,10 @@ p {
 }
 
 .btn-success {
-    border: none;
     box-shadow: 0 4px 8px rgba(2, 2, 2, 0.3);
     width: 7rem;
-    background-image: linear-gradient(to top, #2e392f, #1bef1f);
     transition: all 0.3s ease;
     font-weight: 600;
-    letter-spacing: 3px;
 }
 .btn-primary{
     margin: 10px;

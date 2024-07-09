@@ -134,18 +134,16 @@ main {
 #movieTitleContainer {
     margin-top: 10px;
     margin-bottom: -50px;
-    justify-content: center;
-    border-radius: 50px;
+    justify-content: start;
 }
 
 #movieTitle {
-    font-size: 24px;
+    font-size: 20px;
     font-family: monospace;
-    font-weight: 600;
+    font-weight: 400;
     display: flex; 
-    align-items: center;
+    align-items:start;
     margin-right: 20px;
-    background-image: linear-gradient(to left, #ca0c0c, #1130ca);
 }
 
 #movieTitle i {

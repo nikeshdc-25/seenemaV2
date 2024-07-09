@@ -266,7 +266,6 @@ session_start();
                     <ul class="footer-links">
                         <li><a href="#">Home</a></li>
                         <li><a href="../About/aboutme.html">About Me</a></li>
-                        <li><a href="#">Services</a></li>
                         <li><a href="tel:+9779848050240"><i class="fas fa-phone"></i> Contact</a></li>
                     </ul>
                 </div>
@@ -347,7 +346,7 @@ session_start();
 
         //For Message:
         function updateMovieTitle(title) {
-            movieTitle.innerHTML = `<i class="fas fa-film"></i> ${title}`;
+            movieTitle.innerHTML = `${title}`;
             movieTitleContainer.style.display = 'flex';
         }
 
@@ -391,7 +390,7 @@ session_start();
                         const movieCard = createMovieCard(movie);
                         movieContainer.appendChild(movieCard);
                     });
-                    updateMovieTitle('All Movies');
+                    updateMovieTitle(`<i class="fa-solid fa-arrow-down-a-z"></i> All Movies`);
                     paginationContainer.style.visibility = 'hidden'; // Hide pagination for all movies
                 })
                 .catch(error => console.error('Error fetching all movies from allMovie.php:', error));
@@ -407,7 +406,7 @@ session_start();
                         const movieCard = createMovieCard(movie);
                         movieContainer.appendChild(movieCard);
                     });
-                    updateMovieTitle('Featured Movies');
+                    updateMovieTitle('<i class="fa-solid fa-fire"></i> Featured Movies');
                     paginationContainer.style.visibility = 'hidden';
                 })
                 .catch(error => console.error('Error fetching featured movies from featureMovie.php:', error));
@@ -423,7 +422,7 @@ session_start();
                         const movieCard = createMovieCard(movie);
                         movieContainer.appendChild(movieCard);
                     });
-                    updateMovieTitle('Latest Movies');
+                    updateMovieTitle('<i class="fa-solid fa-rocket"></i> Latest Movies');
                     paginationContainer.style.visibility = 'hidden';
                 })
                 .catch(error => console.error('Error fetching latest movies from latest.php:', error));
@@ -473,12 +472,12 @@ session_start();
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'error' && data.message === 'User not logged in') {
-                        movieContainer.innerHTML = `<p style="color: red; font-size: 30px; font-weight: 600;">No favorite movies found!</p>`;
+                        movieContainer.innerHTML = `<p style="color: red; font-size: 30px; font-weight: 400;">No favorite movies found!</p>`;
                         paginationContainer.style.visibility = 'hidden';
                     } else {
                         movieContainer.innerHTML = '';
                         if (data.length === 0) {
-                            movieContainer.innerHTML = `<p style="color: red; font-size: 30px; font-weight: 600;">No favorite movies found!</p>`;
+                            movieContainer.innerHTML = `<p style="color: red; font-size: 30px; font-weight: 400;">No favorite movies found!</p>`;
                             paginationContainer.style.visibility = 'hidden';
                             return;
                         }
@@ -486,7 +485,7 @@ session_start();
                             const movieCard = createMovieCard(movie);
                             movieContainer.appendChild(movieCard);
                         });
-                        updateMovieTitle('Favorites');
+                        updateMovieTitle('<i class="fa-solid fa-heart"></i> Favorites');
                         paginationContainer.style.visibility = 'hidden';
                     }
                 })

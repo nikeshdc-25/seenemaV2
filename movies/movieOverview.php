@@ -293,7 +293,7 @@ input[type="radio"]:checked ~ label.star:hover ~ .star {
                         <p style="border-bottom: 1px solid rgb(115, 115, 115); color: #c8c8c8;">
                             <span class="review-text"><?php echo substr($reviewText, 0, 150); ?></span>
                             <span class="review-full" style="display:none;"><?php echo $reviewText; ?></span>
-                            <span class="read-more" onclick="toggleContent(this)">. . . Read More</span>
+                            <span class="read-more" onclick="toggleContent(this)">... Read More</span>
                         </p>
                     <?php else: ?>
                         <p style="border-bottom: 1px solid rgb(115, 115, 115); color: #c8c8c8;"><?php echo $reviewText; ?></p>
@@ -324,7 +324,7 @@ input[type="radio"]:checked ~ label.star:hover ~ .star {
                                 <p class="comment-text" style="color: #c8c8c8;">
                                     <span class="comment-text"><?php echo substr($commentText, 0, 150); ?></span>
                                     <span class="comment-full" style="display:none;"><?php echo $commentText; ?></span>
-                                    <span class="read-more" onclick="toggleContent(this)">. . . Read More</span>
+                                    <span class="read-more" onclick="toggleContent(this)">... Read More</span>
                                 </p>
                             <?php else: ?>
                                 <p class="comment-text" style="color: #c8c8c8;"><?php echo $commentText; ?></p>

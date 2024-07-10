@@ -117,7 +117,7 @@ session_start();
                 <label for="country" class="sr-only">Country</label>
                 <select class="form-control" id="country">
                     <option value="">Country</option>
-                    <option value="USA">United States</option>
+                    <option value="America">America</option>
                     <option value="India">India</option>
                     <option value="Nepal">Nepal</option>
                     <option value="China">China</option>
@@ -287,9 +287,14 @@ session_start();
         const quickSearchButton = document.getElementById('quickSearchButton');
         const favMoviesButton = document.getElementById('favMoviesButton');
         const buttons = document.querySelectorAll('.button-container .curved-button');
+        const searchFilterButton = document.querySelector('.search-filter');
+        const filterToggle = document.querySelector('.filter-toggle');
+        const filterBar = document.querySelector('.filter-bar');
         let userFavorites = []
 
 
+
+        //For Notification:
         function showNotification(message, type) {
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
@@ -441,7 +446,7 @@ session_start();
                 .then(data => {
                     movieContainer.innerHTML = '';
                     const searchMessage = document.createElement('p');
-                    searchMessage.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i> Quick Search: <span style='background-color:white; color: black; padding: 0 5px;'>${searchTerm}</span>`;
+                    searchMessage.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i> Quick Search: <span class="filter-tag">${searchTerm}</span>`;
                     searchMessage.classList.add('search-message');
 
                     movieContainer.appendChild(searchMessage);
@@ -488,6 +493,77 @@ session_start();
                 })
                 .catch(error => console.error('Error fetching favorite movies:', error));
         });
+
+        // For Filter Bar to show or hide:
+        filterBar.style.display = 'none';
+        filterToggle.addEventListener('click', (event) => {
+            event.stopPropagation();
+            filterBar.style.display = filterBar.style.display === 'none' ? 'block' : 'none';
+        });
+        document.addEventListener('click', (event) => {
+            if (filterBar.style.display === 'block' && !filterToggle.contains(event.target) && !filterBar.contains(event.target)) {
+                filterBar.style.display = 'none';
+            }
+        });
+        filterBar.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+
+        // For Filter Movies:
+        if (searchFilterButton) {
+            searchFilterButton.addEventListener('click', () => {
+                const year = document.getElementById('year').value;
+                const rating = document.getElementById('rating').value;
+                const country = document.getElementById('country').value;
+                const genre = document.getElementById('genre').value;
+                
+                if (!year && !rating && !country && !genre) {
+                showNotification('Please select at least one filter option.', 'error');
+                return;
+            }
+
+                const queryParams = new URLSearchParams({
+                    year: year,
+                    rating: rating,
+                    country: country,
+                    genre: genre
+                });
+                
+                fetch(`../movies/filterMovie.php?${queryParams.toString()}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        movieContainer.innerHTML = '';
+                        const searchMessage = document.createElement('p');
+                        searchMessage.innerHTML = `<i class="fa-solid fa-filter"></i> Filter:`;
+                        if (year) {
+                            searchMessage.innerHTML += ` <span class="filter-tag">${year}</span>`;
+                        }
+                        if (rating) {
+                            searchMessage.innerHTML += ` <span class="filter-tag">${rating}</span>`;
+                        }
+                        if (country) {
+                            searchMessage.innerHTML += ` <span class="filter-tag">${country}</span>`;
+                        }
+                        if (genre) {
+                            searchMessage.innerHTML += ` <span class="filter-tag">${genre}</span>`;
+                        }
+                        searchMessage.classList.add('search-message');
+                        movieContainer.appendChild(searchMessage);
+
+                        if (data.movies.length === 0) {
+                            movieContainer.innerHTML += `<p style="color: red; font-size: 30px; font-weight: 700;">No movies found!</p>`;
+                            paginationContainer.style.visibility = 'hidden';
+                            return;
+                        }
+                        data.movies.forEach(movie => {
+                            const movieCard = createMovieCard(movie);
+                            movieContainer.appendChild(movieCard);
+                        });
+                        paginationContainer.style.visibility = 'hidden';
+                    })
+                    .catch(error => console.error('Error fetching filtered movies:', error));
+            });
+        }
 
         //For movie cards:
         function createMovieCard(movie) {
@@ -636,7 +712,7 @@ session_start();
         document.querySelector('.footer-links a[href="home"]').addEventListener('click', function (event) {
                 event.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+        });
     </script>
     <script src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

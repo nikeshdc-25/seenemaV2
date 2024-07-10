@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerLink = document.getElementById('registerLink');
     const loginLink = document.getElementById('loginLink');
     const forgetLinks = document.querySelectorAll('.forget');
-    const filterToggle = document.querySelector('.filter-toggle');
-    const filterBar = document.querySelector('.filter-bar');
+   
     
 
     function showNotification(message, type) {
@@ -65,10 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.removeItem('notificationType');
     }
 
-    filterBar.style.display = 'none';
-    filterToggle.addEventListener('click', () => {
-        filterBar.style.display = filterBar.style.display === 'none' ? 'block' : 'none';
-    });
 
     if (loginButton) {
         loginButton.addEventListener('click', function() {
@@ -129,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    //Login Page Logic:
     document.getElementById('loginForm').addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(this);
@@ -150,6 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error:', error));
     });
 
+    //Register Page Logic:
     document.getElementById('registerForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -174,7 +171,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error:', error));
     });
-
+    
+    //Forget Password Page Logic:
     document.getElementById('forgetForm').addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(this);
@@ -197,6 +195,4 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error:', error));
     });
-    
-    
 });

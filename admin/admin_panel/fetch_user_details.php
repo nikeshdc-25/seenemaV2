@@ -21,12 +21,12 @@ if (isset($_GET['userID'])) {
     $userID = $_GET['userID'];
 
     $userQuery = "
-        SELECT u.username, u.email, u.favDish, p.user_rating, p.review_title, p.user_review, c.comment, m.title, m.poster
-        FROM userdata u
-        LEFT JOIN comments c ON u.userID = c.userID
-        LEFT JOIN movies m ON c.movieID = m.movieID
-        LEFT JOIN seenepoll p ON u.userID = p.userID AND m.movieID = p.movieID
-        WHERE u.userID = $userID
+    SELECT u.username, u.email, u.favDish, p.user_rating, p.review_title, p.user_review, c.comment, m.title, m.poster
+    FROM userdata u
+    LEFT JOIN seenepoll p ON u.userID = p.userID
+    LEFT JOIN comments c ON u.userID = c.userID AND c.movieID = p.movieID
+    LEFT JOIN movies m ON p.movieID = m.movieID
+    WHERE u.userID = $userID
     ";
 
     $result = $conn->query($userQuery);

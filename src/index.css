@@ -129,14 +129,21 @@ main {
     display: flex;
 }
 
-/*For Search Message*/
+/*For Search and Filter Message*/
 .search-message {
-    color: rgb(165, 165, 165);
+    color: rgb(242, 0, 0);
     font-size: 20px;
     font-family: cursive;
     text-align: center;
     width: 100%;
     margin-bottom: -20px;
+}
+.filter-tag{
+    background-color:#b2b2b2;
+    color: black; 
+    padding: 0 5px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 8px;
 }
 
 
@@ -145,29 +152,30 @@ main {
     display: flex;
     justify-content: center;
     z-index: 10;
-    position: relative;
-    margin-top: 10px;
-    margin-bottom: 50px;
+    padding: 25px;
 }
 
 .page-button {
-    background-color: #656565;
     border: none;
-    color: #fff;
+    color: #303030;
     padding: 5px 10px;
-    margin: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(2, 2, 2, 1);
+    margin: 0px 5px;
+    background: #dde1e7;
+    border-radius: 3px;
+    width: 35px;
+    align-items: center;
 }
 
-.page-button:hover {
-    background-color: #393939;
-}
 
 .page-button.active {
-    background-color: #c80000;
+    box-shadow: inset -3px -3px 7px #b4b4b473,
+    inset 3px 3px 5px rgba(71, 78, 91, 0.288);
+    color: #000000;
+    border-bottom: 3px solid rgb(212, 0, 255);
+    padding: 5px 10px;
+    font-weight: 600;
 }
 
 /*For Filter Bar*/
@@ -218,7 +226,7 @@ main {
 
 .search-filter {
     color: #a9a5b0;
-    padding: 1px 15px;
+    padding: 5px 15px 2px 15px;
     margin: 0 5px;
     border: none;
     border-radius: 20px;
@@ -234,15 +242,11 @@ main {
 }
 .search-filter:hover{
     color: rgb(255, 255, 255);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
 }
 .search-button{
-    background-color: #232323;
-    padding: 1px 15px;
-    margin: 0 5px;
-    border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 18px;
     font-family:monospace;
     transition: all 0.4s ease;
     position: relative;
@@ -326,7 +330,7 @@ main {
 }
 
 .search-button {
-    padding: 5px 10px; 
+    padding: 5px 12px 4px 12px; 
     border: none;
     background-color: #232323;
     color: rgb(210, 208, 208);
@@ -334,20 +338,9 @@ main {
     transition: all 0.4s ease;
     margin-left: 5px;
     position: relative;
+    justify-content: center;
+    align-items: center;
 }
-
-.search-button:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.6);
-    clip-path: polygon(10% 0, 70% 0, 90% 100%, 30% 100%);
-    transition: all 300ms ease;
-}
-
 
 @keyframes rainbow {
     0% { text-shadow: 0 0 6px rgb(255, 0, 0); }

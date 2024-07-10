@@ -20,19 +20,19 @@ if ($conn->connect_error) {
 if (isset($_GET['userID'])) {
     $userID = $_GET['userID'];
 
-    $userQuery = "
-    SELECT u.username, u.email, u.favDish, p.user_rating, p.review_title, p.user_review, c.comment, m.title, m.poster
-    FROM userdata u
-    LEFT JOIN seenepoll p ON u.userID = p.userID
-    LEFT JOIN comments c ON u.userID = c.userID AND c.movieID = p.movieID
-    LEFT JOIN movies m ON p.movieID = m.movieID
-    WHERE u.userID = $userID
+    // Query to fetch user reviews and review titles
+    $reviewQuery = "
+        SELECT u.username, u.email, u.favDish, p.user_rating, p.review_title, p.user_review, m.movieID, m.title, m.poster
+        FROM userdata u
+        LEFT JOIN seenepoll p ON u.userID = p.userID
+        LEFT JOIN movies m ON p.movieID = m.movieID
+        WHERE u.userID = $userID
     ";
 
-    $result = $conn->query($userQuery);
+    $reviewResult = $conn->query($reviewQuery);
 
-    if ($result->num_rows > 0) {
-        $userData = $result->fetch_assoc();
+    if ($reviewResult->num_rows > 0) {
+        $userData = $reviewResult->fetch_assoc();
         $username = htmlspecialchars($userData['username']);
         $favDish = htmlspecialchars($userData['favDish']);
         
@@ -46,55 +46,103 @@ if (isset($_GET['userID'])) {
         
         $dataByMovie = [];
         do {
+            $movieID = $userData['movieID'];
             $title = htmlspecialchars($userData['title']);
             $poster = htmlspecialchars($userData['poster']);
             $userRating = $userData['user_rating'];
             $reviewTitle = htmlspecialchars($userData['review_title']);
             $userReview = htmlspecialchars($userData['user_review']);
-            $comment = htmlspecialchars($userData['comment']);
 
-            if (!isset($dataByMovie[$title])) {
-                $dataByMovie[$title] = [
+            // Initialize movie entry if not exists
+            if (!isset($dataByMovie[$movieID])) {
+                $dataByMovie[$movieID] = [
+                    'title' => $title,
                     'poster' => $poster,
-                    'user_rating' => $userRating,
-                    'review_title' => $reviewTitle,
-                    'user_review' => $userReview,
+                    'reviews' => [],
                     'comments' => []
                 ];
             }
 
-            if (!empty($comment)) {
-                $dataByMovie[$title]['comments'][] = $comment;
+            // Add review if available
+            if (!empty($userRating)) {
+                $dataByMovie[$movieID]['reviews'][] = [
+                    'user_rating' => $userRating,
+                    'review_title' => $reviewTitle,
+                    'user_review' => $userReview
+                ];
             }
-        } while ($userData = $result->fetch_assoc());
+        } while ($userData = $reviewResult->fetch_assoc());
 
-        foreach ($dataByMovie as $title => $details) {
+        // Query to fetch comments for the user
+        $commentQuery = "
+            SELECT c.comment, m.movieID, m.title, m.poster
+            FROM comments c
+            LEFT JOIN movies m ON c.movieID = m.movieID
+            WHERE c.userID = $userID
+        ";
+
+        $commentResult = $conn->query($commentQuery);
+
+        if ($commentResult->num_rows > 0) {
+            while ($commentData = $commentResult->fetch_assoc()) {
+                $movieID = $commentData['movieID'];
+                $title = htmlspecialchars($commentData['title']);
+                $poster = htmlspecialchars($commentData['poster']);
+                $comment = htmlspecialchars($commentData['comment']);
+
+                // Add comment if movie already exists in dataByMovie array
+                if (isset($dataByMovie[$movieID])) {
+                    $dataByMovie[$movieID]['comments'][] = $comment;
+                } else {
+                    // Add movie entry if not exists
+                    $dataByMovie[$movieID] = [
+                        'title' => $title,
+                        'poster' => $poster,
+                        'reviews' => [],
+                        'comments' => [$comment]
+                    ];
+                }
+            }
+        }
+
+        // Display each movie with reviews and comments
+        foreach ($dataByMovie as $movie) {
             echo "<div style='border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 20px;'>";
-            echo "<h4>$title</h4>";
-            if (!empty($details['poster'])) {
-                echo "<img src='{$details['poster']}' alt='$title Poster' style='max-width: 200px;'>";
+            echo "<h4>{$movie['title']}</h4>";
+            if (!empty($movie['poster'])) {
+                echo "<img src='{$movie['poster']}' alt='{$movie['title']} Poster' style='max-width: 200px;'>";
             }
-            if (!empty($details['user_rating'])) {
-                echo "<p><strong>Rating:</strong> {$details['user_rating']}</p>";
-                echo "<p><strong>Review Title:</strong> {$details['review_title']}</p>";
-                echo "<p><strong>Review:</strong> {$details['user_review']}</p>";
+
+            // Display reviews if available
+            if (!empty($movie['reviews'])) {
+                echo "<h5>User Reviews:</h5>";
+                foreach ($movie['reviews'] as $review) {
+                    echo "<p><strong>Rating:</strong> {$review['user_rating']}</p>";
+                    echo "<p><strong>Review Title:</strong> {$review['review_title']}</p>";
+                    echo "<p><strong>Review:</strong> {$review['user_review']}</p>";
+                }
             } else {
-                echo "<p>No rating or review provided for this movie!</p>";
+                echo "<p>No reviews available for this movie.</p>";
             }
-            if (!empty($details['comments'])) {
-                echo "<p><strong>Comments:</strong></p><ul>";
-                foreach ($details['comments'] as $comment) {
+
+            // Display comments if available
+            if (!empty($movie['comments'])) {
+                echo "<h5>User Comments:</h5>";
+                echo "<ul>";
+                foreach ($movie['comments'] as $comment) {
                     echo "<li>$comment</li>";
                 }
                 echo "</ul>";
             } else {
-                echo "<p>No comments available for this movie!</p>";
+                echo "<p>No comments available for this movie.</p>";
             }
+
             echo "</div>";
         }
+
         echo "</div>";
     } else {
-        echo "User not found.";
+        echo "User data not found.";
     }
 } else {
     echo "User ID not provided.";

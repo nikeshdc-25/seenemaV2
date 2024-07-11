@@ -10,6 +10,7 @@ session_start();
     <title>Seenema</title>
     <link rel="icon" href="../seenema_img/seenemaLogo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="index.css">
     <style>
@@ -31,7 +32,7 @@ session_start();
 <body id="top">
     <header class="d-flex align-items-center justify-content-left logo-container">
         <img src="../seenema_img/seenemaLogo.png" alt="Seenema Logo" class="me-2">
-        <a class="seenemaTxt">SEENEMA</a> 
+        <a href="#" class="seenemaTxt">SEENEMA</a> 
     </header>
     <aside class="button-container d-flex justify-content-center align-items-center flex-wrap">
         <button class="curved-button" title="Home" id="homeButton"><i class="fas fa-home"></i></button>
@@ -156,7 +157,21 @@ session_start();
         </nav>
     </div>
     <main class="col-12">
+        <!-- Carousel -->
+        <div id="featureCarousel" class="carousel slide m-4" data-ride="carousel">
+        <span style="color: #8b8b8b; font-weight: 700;" class="pl-3"><i class="fa-solid fa-thumbs-up" style="font-size:20px; color:darkorange;"></i> Recommended Movies:</span>
+            <div id="carouselInner" class="carousel-inner"></div>
+            <a class="carousel-control-prev" href="#featureCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#featureCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <!--For Movie Cards Display-->
         <div class="movie-container d-flex justify-content-center flex-wrap"></div>
+        <!--For Pagination Display-->
         <div class="pagination-container"></div>
         <!--Login Form-->
         <div id="loginModal" class="modal">
@@ -293,7 +308,6 @@ session_start();
         let userFavorites = []
 
 
-
         //For Notification:
         function showNotification(message, type) {
         const notification = document.createElement('div');
@@ -388,6 +402,7 @@ session_start();
                         movieContainer.appendChild(movieCard);
                     });
                     paginationContainer.style.visibility = 'hidden'; // Hide pagination for all movies
+                    document.querySelector('.carousel').style.display = 'none';
                 })
                 .catch(error => console.error('Error fetching all movies from allMovie.php:', error));
         }
@@ -403,6 +418,7 @@ session_start();
                         movieContainer.appendChild(movieCard);
                     });
                     paginationContainer.style.visibility = 'hidden';
+                    document.querySelector('.carousel').style.display = 'none';
                 })
                 .catch(error => console.error('Error fetching featured movies from featureMovie.php:', error));
         }
@@ -418,6 +434,7 @@ session_start();
                         movieContainer.appendChild(movieCard);
                     });
                     paginationContainer.style.visibility = 'hidden';
+                    document.querySelector('.carousel').style.display = 'none';
                 })
                 .catch(error => console.error('Error fetching latest movies from latest.php:', error));
         }
@@ -454,6 +471,7 @@ session_start();
                     if (data.length === 0) {
                         movieContainer.innerHTML += `<p style="color: red; font-size: 30px; font-weight: 700;">No movies found!</p>`;
                         paginationContainer.style.visibility = 'hidden';
+                        document.querySelector('.carousel').style.display = 'none';
                         return;
                     }
 
@@ -463,6 +481,7 @@ session_start();
                     });
 
                     paginationContainer.style.visibility = 'hidden';
+                    document.querySelector('.carousel').style.display = 'none';
                 })
                 .catch(error => console.error('Error fetching movies from quickSearch.php:', error));
         }
@@ -477,11 +496,13 @@ session_start();
                     if (data.status === 'error' && data.message === 'User not logged in') {
                         movieContainer.innerHTML = `<p style="color: red; font-size: 30px; font-weight: 400;">No favorite movies found!</p>`;
                         paginationContainer.style.visibility = 'hidden';
+                        document.querySelector('.carousel').style.display = 'none';
                     } else {
                         movieContainer.innerHTML = '';
                         if (data.length === 0) {
                             movieContainer.innerHTML = `<p style="color: red; font-size: 30px; font-weight: 400;">No favorite movies found!</p>`;
                             paginationContainer.style.visibility = 'hidden';
+                            document.querySelector('.carousel').style.display = 'none';
                             return;
                         }
                         data.forEach(movie => {
@@ -489,6 +510,7 @@ session_start();
                             movieContainer.appendChild(movieCard);
                         });
                         paginationContainer.style.visibility = 'hidden';
+                        document.querySelector('.carousel').style.display = 'none';
                     }
                 })
                 .catch(error => console.error('Error fetching favorite movies:', error));
@@ -553,6 +575,7 @@ session_start();
                         if (data.movies.length === 0) {
                             movieContainer.innerHTML += `<p style="color: red; font-size: 30px; font-weight: 700;">No movies found!</p>`;
                             paginationContainer.style.visibility = 'hidden';
+                            document.querySelector('.carousel').style.display = 'none';
                             return;
                         }
                         data.movies.forEach(movie => {
@@ -560,9 +583,73 @@ session_start();
                             movieContainer.appendChild(movieCard);
                         });
                         paginationContainer.style.visibility = 'hidden';
+                        document.querySelector('.carousel').style.display = 'none';
                     })
                     .catch(error => console.error('Error fetching filtered movies:', error));
             });
+        }
+
+        // For Carousel:
+        const carouselInner = document.querySelector('.carousel-inner');
+
+        fetchMoviesForCarousel();
+
+        function fetchMoviesForCarousel() {
+            fetch('../movies/carousel.php')
+                .then(response => response.json())
+                .then(data => {
+                    carouselInner.innerHTML = '';  // Clear previous carousel items if any
+                    const chunkSize = 3;
+                    let chunks = [];
+
+                    for (let i = 0; i < data.movies.length; i += chunkSize) {
+                        chunks.push(data.movies.slice(i, i + chunkSize));
+                    }
+
+                    chunks.forEach((chunk, index) => {
+                        const carouselItem = document.createElement('div');
+                        carouselItem.classList.add('carousel-item');
+                        if (index === 0) {
+                            carouselItem.classList.add('active');
+                        }
+
+                        const row = document.createElement('div');
+                        row.classList.add('row', 'w-100', 'd-flex', 'justify-content-center');
+
+                        chunk.forEach(movie => {
+                            const carouselMovieCard = createCarouselMovieCard(movie);
+                            const col = document.createElement('div');
+                            col.classList.add('col-md-4');
+                            col.appendChild(carouselMovieCard);
+                            row.appendChild(col);
+                        });
+
+                        carouselItem.appendChild(row);
+                        carouselInner.appendChild(carouselItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching movies from carousel.php:', error));
+        }
+
+        function createCarouselMovieCard(movie) {
+            const card = document.createElement('div');
+            card.classList.add('carousel-movie-card', 'mt-2');
+            const truncatedDescription = movie.description.length > 100 ? movie.description.substring(0, 100) + '...' : movie.description;
+            card.innerHTML = `
+                <img src="${movie.poster}" class="card-img-top" alt="${movie.title}">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h4 class="card-title">${movie.title}</h4>
+                    <div class="footer-content">
+                        <p class="card-text">${truncatedDescription}</p>
+                        <h4 class="card-text"><i class="fa-solid fa-heart"></i> ${movie.rating} ⬝ ${movie.release_date}</h4>
+                        <h4 class="card-text" style="color:#d3d3d3; font-weight: 700;">${movie.genre}</h4>
+                    </div>
+                </div>
+            `;
+            card.addEventListener('click', function() {
+                window.location.href = `../movies/movieOverview.php?title=${encodeURIComponent(movie.title)}`;
+            });
+            return card;
         }
 
         //For movie cards:
@@ -656,6 +743,7 @@ session_start();
             homeButton.addEventListener('click', ()=>{
                 fetchMoviesFromFetchMoviesPHP();
                 paginationContainer.style.visibility = 'visible';
+                document.querySelector('.carousel').style.display = 'block';
             });
         }
 
@@ -715,6 +803,9 @@ session_start();
         });
     </script>
     <script src="index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>

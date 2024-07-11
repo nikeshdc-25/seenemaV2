@@ -30,6 +30,95 @@ p {
     flex: 1;
     display: flex;
 }
+.carousel{
+    border-bottom: 1px solid rgb(104, 104, 104);
+}
+
+/*For Carousel CSS:*/
+.carousel-movie-card {
+    display: flex;
+    width: 104%;
+    margin-bottom: 30px;
+    text-align: left;
+    border: 2px solid rgb(92, 92, 92);
+    border-radius: 20px;
+    height: 19rem;
+    background-color: #121212;
+}
+.carousel-movie-card:hover{
+    border: 2px solid rgb(255, 0, 234);
+    box-shadow: inset 0 0 50px rgba(255, 0, 242, 0.7);
+    transition: all 0.3s ease;
+}
+.carousel-movie-card:active{
+    border: 2px solid rgb(255, 0, 234);
+    box-shadow: inset 0 0 100px rgb(242, 0, 255);
+}
+
+.carousel-movie-card img {
+    width: 80%;
+    border-radius: 20px;
+    margin-right: 10px;
+    max-height: 19rem;
+    max-width: 15rem;
+}
+
+.carousel-movie-card .card-body {
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -50px;
+}
+
+.carousel-movie-card .card-title {
+    font-size: 1.5em;
+    color: #ffffff;
+}
+
+.carousel-movie-card .card-text {
+    font-size: 1em;
+    color: #8b8b8b;
+}
+
+.carousel-movie-card .footer-content {
+    position: absolute;
+    margin-bottom: 35px;
+    bottom: 0;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #ff00ea;
+    background-image: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.carousel-control-prev-icon::before,
+.carousel-control-next-icon::before {
+    content: ''
+}
+
+.carousel-control-prev-icon::after,
+.carousel-control-next-icon::after {
+    content: '‹';
+    color: white; 
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.carousel-control-next-icon::after {
+    content: '›';
+}
+
+
 
 main {
     display: flex;
@@ -365,7 +454,7 @@ main {
     cursor: pointer;
     font-family: fantasy;
     letter-spacing: 5px;
-    background-image: linear-gradient(to top, #de1616, #ff0000);
+    background: linear-gradient(to top, #de1616, #ff0000);
     background-clip: text;
     color: transparent;
     padding-left: 1px;

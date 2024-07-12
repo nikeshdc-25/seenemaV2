@@ -28,7 +28,7 @@ $totalMoviesRow = $totalMoviesResult->fetch_assoc();
 $totalMovies = $totalMoviesRow['total'];
 $totalPages = ceil($totalMovies / $perPage);
 
-$sql = "SELECT movieID, title, director, actor, genre, country, description, poster, release_date, rating, imdbVotes FROM movies LIMIT $offset, $perPage";
+$sql = "SELECT movieID, title, director, actor, actor2, genre, genre2, minute, country, description, poster, release_date, rating, imdbVotes FROM movies LIMIT $offset, $perPage";
 $result = $conn->query($sql);
 
 $movies = [];
@@ -189,7 +189,10 @@ $conn->close();
                             data-title="<?php echo htmlspecialchars($movie['title']); ?>"
                             data-director="<?php echo htmlspecialchars($movie['director']); ?>"
                             data-actor="<?php echo htmlspecialchars($movie['actor']); ?>"
+                            data-actor2="<?php echo htmlspecialchars($movie['actor2']); ?>"
                             data-genre="<?php echo htmlspecialchars($movie['genre']); ?>"
+                            data-genre2="<?php echo htmlspecialchars($movie['genre2']); ?>"
+                            data-minute="<?php echo htmlspecialchars($movie['minute']); ?>"
                             data-country="<?php echo htmlspecialchars($movie['country']); ?>"
                             data-description="<?php echo htmlspecialchars($movie['description']); ?>"
                             data-poster="<?php echo htmlspecialchars($movie['poster']); ?>"
@@ -257,13 +260,16 @@ $conn->close();
                     const title = this.getAttribute('data-title');
                     const director = this.getAttribute('data-director');
                     const actor = this.getAttribute('data-actor');
+                    const actor2 = this.getAttribute('data-actor2');
                     const genre = this.getAttribute('data-genre');
+                    const genre2 = this.getAttribute('data-genre2');
+                    const minute = this.getAttribute('data-minute');
                     const country = this.getAttribute('data-country');
                     const description = this.getAttribute('data-description');
                     const poster = this.getAttribute('data-poster');
                     const rating = this.getAttribute('data-rating');
                     const imdbVotes = this.getAttribute('data-imdbVotes');
-                    window.location.href = `update.php?movie_id=${movieId}&title=${encodeURIComponent(title)}&director=${encodeURIComponent(director)}&actor=${encodeURIComponent(actor)}&genre=${encodeURIComponent(genre)}&country=${encodeURIComponent(country)}&description=${encodeURIComponent(description)}&poster=${encodeURIComponent(poster)}&rating=${encodeURIComponent(rating)}&imdbVotes=${encodeURIComponent(imdbVotes)}`;
+                    window.location.href = `update.php?movie_id=${movieId}&title=${encodeURIComponent(title)}&director=${encodeURIComponent(director)}&actor=${encodeURIComponent(actor)}&actor2=${encodeURIComponent(actor2)}&genre=${encodeURIComponent(genre)}&genre2=${encodeURIComponent(genre2)}&minute=${encodeURIComponent(minute)}&country=${encodeURIComponent(country)}&description=${encodeURIComponent(description)}&poster=${encodeURIComponent(poster)}&rating=${encodeURIComponent(rating)}&imdbVotes=${encodeURIComponent(imdbVotes)}`;
                 });
             });
 

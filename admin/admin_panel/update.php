@@ -8,7 +8,10 @@ $movieID = $_GET['movie_id'] ?? null;
 $title = $_GET['title'] ?? '';
 $director = $_GET['director'] ?? '';
 $actor = $_GET['actor'] ?? '';
+$actor2 = $_GET['actor2'] ?? '';
 $genre = $_GET['genre'] ?? '';
+$genre2 = $_GET['genre2'] ?? '';
+$minute = $_GET['minute'] ?? '';
 $country = $_GET['country'] ?? '';
 $description = $_GET['description'] ?? '';
 $poster = $_GET['poster'] ?? '';
@@ -102,12 +105,24 @@ $imdbVotes = $_GET['imdbVotes'] ?? '';
                             <input type="text" id="director" name="director" class="form-control" value="<?php echo htmlspecialchars($director); ?>"> 
                         </div>
                         <div class="form-group">
-                            <label for="actor" class="form-label">Actor:</label>
+                            <label for="actor" class="form-label">Actor 1:</label>
                             <input type="text" id="actor" name="actor" class="form-control" value="<?php echo htmlspecialchars($actor); ?>">
                         </div>
                         <div class="form-group">
-                            <label for="genre" class="form-label">Genre:</label>
+                            <label for="actor2" class="form-label">Actor 2:</label>
+                            <input type="text" id="actor2" name="actor2" class="form-control" value="<?php echo htmlspecialchars($actor2); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="genre" class="form-label">Genre 1:</label>
                             <input type="text" id="genre" name="genre" class="form-control" value="<?php echo htmlspecialchars($genre); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="genre2" class="form-label">Genre 2:</label>
+                            <input type="text" id="genre2" name="genre2" class="form-control" value="<?php echo htmlspecialchars($genre2); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="minute" class="form-label">Minute:</label>
+                            <input type="number" id="minute" name="minute" class="form-control" value="<?php echo htmlspecialchars($minute); ?>">
                         </div>
                         <div class="form-group">
                             <label for="country" class="form-label">Country:</label>

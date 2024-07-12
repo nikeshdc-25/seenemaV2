@@ -95,12 +95,24 @@ if (!isset($_SESSION['admin_id'])) {
                             <input type="text" id="director" name="director" class="form-control"required>
                         </div>
                         <div class="form-group">
-                            <label for="actor" class="form-label">Actor:</label><span style="color: red;"> *</span>
+                            <label for="actor" class="form-label">Actor 1:</label><span style="color: red;"> *</span>
                             <input type="text" id="actor" name="actor" class="form-control"required>
                         </div>
                         <div class="form-group">
-                            <label for="genre" class="form-label">Genre:</label><span style="color: red;"> *</span>
+                            <label for="actor2" class="form-label">Actor 2:</label><span style="color: red;"> *</span>
+                            <input type="text" id="actor2" name="actor2" class="form-control"required>
+                        </div>
+                        <div class="form-group">
+                            <label for="genre" class="form-label">Genre 1:</label><span style="color: red;"> *</span>
                             <input type="text" id="genre" name="genre" class="form-control"required>
+                        </div>
+                        <div class="form-group">
+                            <label for="genre2" class="form-label">Genre 2:</label><span style="color: red;"> *</span>
+                            <input type="text" id="genre2" name="genre2" class="form-control"required>
+                        </div>
+                        <div class="form-group">
+                            <label for="minute" class="form-label">Minute:</label><span style="color: red;"> *</span>
+                            <input type="number" id="minute" name="minute" class="form-control"required>
                         </div>
                         <div class="form-group">
                             <label for="country" class="form-label">Country:</label>

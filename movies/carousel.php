@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT title, poster, description, rating, release_date, genre FROM movies ORDER BY imdbVotes DESC LIMIT 12";
+$sql = "SELECT title, poster, description, rating, release_date, genre, genre2, minute FROM movies ORDER BY imdbVotes DESC LIMIT 12";
 $result = $conn->query($sql);
 
 $movies = [];
@@ -24,6 +24,8 @@ if ($result->num_rows > 0) {
             'description' => $row['description'],
             'rating' => $row['rating'],
             'genre' => $row['genre'],
+            'genre2' => $row['genre2'],
+            'minute' => $row['minute'],
             'release_date' => $releaseYear,
         ];
     }

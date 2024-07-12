@@ -22,7 +22,10 @@ if ($conn->connect_error) {
 $title = $_POST['title'];
 $director = $_POST['director'];
 $actor = $_POST['actor'];
+$actor2 = $_POST['actor2'];
 $genre = $_POST['genre'];
+$genre2 = $_POST['genre2'];
+$minute = $_POST['minute'];
 $country = $_POST['country'];
 $description = $_POST['description'];
 $poster = $_POST['poster'];
@@ -43,8 +46,8 @@ if ($count > 0) {
     exit;
 }
 
-$stmt = $conn->prepare("INSERT INTO movies (title, director, actor, genre, country, description, poster, release_date, rating, imdbVotes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssssssdd", $title, $director, $actor, $genre, $country, $description, $poster, $release_date, $rating, $imdbVotes);
+$stmt = $conn->prepare("INSERT INTO movies (title, director, actor, actor2, genre, genre2, minute, country, description, poster, release_date, rating, imdbVotes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssssdssssdd", $title, $director, $actor, $actor2, $genre, $genre2, $minute, $country, $description, $poster, $release_date, $rating, $imdbVotes);
 
 if ($stmt->execute()) {
     $movie_id = $stmt->insert_id;

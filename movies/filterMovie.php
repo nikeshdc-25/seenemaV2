@@ -21,9 +21,10 @@ $year = isset($_GET['year']) ? $_GET['year'] : '';
 $rating = isset($_GET['rating']) ? $_GET['rating'] : '';
 $country = isset($_GET['country']) ? $_GET['country'] : '';
 $genre = isset($_GET['genre']) ? $_GET['genre'] : '';
+$actor = isset($_GET['actor']) ? $_GET['actor'] : '';
 
 // Build SQL query with filters
-$sql = "SELECT m.movieID, m.title, m.director, m.actor, m.genre, m.country, m.description, m.poster, m.release_date, m.rating, m.imdbVotes, 
+$sql = "SELECT m.movieID, m.title, m.director, m.actor, m.actor2, m.genre, m.genre2, m.country, m.description, m.poster, m.release_date, m.rating, m.imdbVotes, 
                IF(f.movieID IS NOT NULL, 1, 0) AS is_favorite
         FROM movies m
         LEFT JOIN favorites f ON m.movieID = f.movieID AND f.userID = ?
@@ -48,9 +49,16 @@ if (!empty($country)) {
     $types .= "s";
 }
 if (!empty($genre)) {
-    $sql .= " AND m.genre = ?";
+    $sql .= " AND (m.genre = ? OR m.genre2 = ?)";
     $params[] = $genre;
-    $types .= "s";
+    $params[] = $genre;
+    $types .= "ss";
+}
+if (!empty($actor)) {
+    $sql .= " AND (m.actor = ? OR m.actor2 = ?)";
+    $params[] = $actor;
+    $params[] = $actor;
+    $types .= "ss";
 }
 
 $sql .= " ORDER BY m.title ASC";

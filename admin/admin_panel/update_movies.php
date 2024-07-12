@@ -58,12 +58,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['movie_id'])) {
         $stmt->close();
     }
 
+    if (!empty($_POST['actor2'])) {
+        $actor2 = $_POST['actor2'];
+        $stmt = $conn->prepare("UPDATE movies SET actor2 = ? WHERE movieID = ?");
+        $stmt->bind_param("si", $actor2, $movieID);
+        if (!$stmt->execute()) {
+            echo json_encode(["status" => "error", "message" => "Error updating actor: " . $conn->error]);
+            $stmt->close();
+            exit;
+        }
+        $stmt->close();
+    }
+
     if (!empty($_POST['genre'])) {
         $genre = $_POST['genre'];
         $stmt = $conn->prepare("UPDATE movies SET genre = ? WHERE movieID = ?");
         $stmt->bind_param("si", $genre, $movieID);
         if (!$stmt->execute()) {
             echo json_encode(["status" => "error", "message" => "Error updating genre: " . $conn->error]);
+            $stmt->close();
+            exit;
+        }
+        $stmt->close();
+    }
+
+    if (!empty($_POST['genre2'])) {
+        $genre2 = $_POST['genre2'];
+        $stmt = $conn->prepare("UPDATE movies SET genre2 = ? WHERE movieID = ?");
+        $stmt->bind_param("si", $genre2, $movieID);
+        if (!$stmt->execute()) {
+            echo json_encode(["status" => "error", "message" => "Error updating genre: " . $conn->error]);
+            $stmt->close();
+            exit;
+        }
+        $stmt->close();
+    }
+
+    if (!empty($_POST['minute'])) {
+        $minute = $_POST['minute'];
+        $stmt = $conn->prepare("UPDATE movies SET minute = ? WHERE movieID = ?");
+        $stmt->bind_param("di", $minute, $movieID);
+        if (!$stmt->execute()) {
+            echo json_encode(["status" => "error", "message" => "Error updating minutes: " . $conn->error]);
             $stmt->close();
             exit;
         }

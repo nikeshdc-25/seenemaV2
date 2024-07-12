@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 }
 
 function getMovieDetails($conn, $movieTitle) {
-    $sql = "SELECT movieID, title, director, actor, poster, description, rating, genre, release_date, country, imdbVotes FROM movies WHERE title = ?";
+    $sql = "SELECT movieID, title, director, actor, poster, description, rating, genre, genre2, actor2, minute, release_date, country, imdbVotes FROM movies WHERE title = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $movieTitle);
     $stmt->execute();
@@ -253,11 +253,12 @@ input[type="radio"]:checked ~ label.star:hover ~ .star {
             <div class="col-md-4">
                 <p><strong>Movie:</strong> <b><?php echo htmlspecialchars($movie['title']); ?></b></p>
                 <p><strong>Director:</strong> <?php echo htmlspecialchars($movie['director']); ?></p>
-                <p><strong>Lead Actor:</strong> <?php echo htmlspecialchars($movie['actor']); ?></p>
-                <p><strong>Genre:</strong> <?php echo htmlspecialchars($movie['genre']); ?></p>
+                <p><strong>Actors:</strong> <?php echo htmlspecialchars($movie['actor']) . ', ' . htmlspecialchars($movie['actor2']); ?></p>
+                <p><strong>Genre:</strong> <?php echo htmlspecialchars($movie['genre']) . ', ' . htmlspecialchars($movie['genre2']); ?></p>
                 <p><strong>IMDb Rating:</strong> <?php echo htmlspecialchars($movie['rating']); ?>/10</p>
                 <p><strong>Release-Date:</strong> <?php echo htmlspecialchars($movie['release_date']); ?></p>
                 <p><strong>Country:</strong> <?php echo htmlspecialchars($movie['country']); ?></p>
+                <p><strong>Minute:</strong> <?php echo number_format($movie['minute']); ?> min</p>
                 <p><strong>SeenePoll:</strong> <?php echo number_format($averageRating, 1); ?>/10</p>
                 <p><strong>IMDb Votes:</strong> <?php echo number_format($movie['imdbVotes']); ?></p>
                 <p><strong>Description:</strong> <?php echo htmlspecialchars($movie['description']); ?></p>

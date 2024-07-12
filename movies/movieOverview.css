@@ -1,8 +1,8 @@
 body {
     background-color: rgb(39, 39, 39);
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
@@ -31,9 +31,9 @@ h1 {
 
 p {
     padding: 2px 8px;
-    color:#ffffff;
+    color:#e3e3e3;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .btn-success {
@@ -77,9 +77,31 @@ h2 {
     color: #d1d1d1;
 }
 
-strong {
+.movie-info {
+        display: flex;
+        flex-direction: column;
+}
+
+.movie-info strong {
+    width: 100px;
+    text-align: left;
+    margin-right: 10px;
+    color: #ababab;
+    font-weight: 500;
+    background-image: linear-gradient(to right, #131417, rgb(139, 24, 185));
+    border-top-right-radius: 15px;
+}
+
+.movie-info p {
+    display: flex;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #e7e7e7;
+}
+
+.review-container strong {
     padding: 2px 8px;
-    background-color:#894aaa;
+    background-color:#924ab9;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(2, 2, 2, 0.5);
     border-radius: 5px;

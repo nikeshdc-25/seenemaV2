@@ -638,7 +638,7 @@ session_start();
             card.innerHTML = `
                 <img src="${movie.poster}" class="card-img-top" alt="${movie.title}">
                 <div class="card-body d-flex flex-column justify-content-between">
-                    <h4 class="card-title pt-4">${movie.title}</h4>
+                    <h4 class="card-title pt-3">${movie.title}</h4>
                     <div class="footer-content">
                         <p class="card-text">${truncatedDescription}</p>
                         <h4 class="card-text"><i class="fa-solid fa-heart"></i> ${movie.rating} ⬝ ${movie.release_date} ⬝ ${movie.minute} min</h4>

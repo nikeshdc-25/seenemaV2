@@ -251,20 +251,22 @@ input[type="radio"]:checked ~ label.star:hover ~ .star {
                 <img src="<?php echo htmlspecialchars($movie['poster']); ?>" class="img-fluid" alt="<?php echo htmlspecialchars($movie['title']); ?>">
             </div>
             <div class="col-md-4">
-                <p><strong>Movie:</strong> <b><?php echo htmlspecialchars($movie['title']); ?></b></p>
-                <p><strong>Director:</strong> <?php echo htmlspecialchars($movie['director']); ?></p>
-                <p><strong>Actors:</strong> <?php echo htmlspecialchars($movie['actor']) . ', ' . htmlspecialchars($movie['actor2']); ?></p>
-                <p><strong>Genre:</strong> <?php echo htmlspecialchars($movie['genre']) . ', ' . htmlspecialchars($movie['genre2']); ?></p>
-                <p><strong>IMDb Rating:</strong> <?php echo htmlspecialchars($movie['rating']); ?>/10</p>
-                <p><strong>Release-Date:</strong> <?php echo htmlspecialchars($movie['release_date']); ?></p>
-                <p><strong>Country:</strong> <?php echo htmlspecialchars($movie['country']); ?></p>
-                <p><strong>Minute:</strong> <?php echo number_format($movie['minute']); ?> min</p>
-                <p><strong>SeenePoll:</strong> <?php echo number_format($averageRating, 1); ?>/10</p>
-                <p><strong>IMDb Votes:</strong> <?php echo number_format($movie['imdbVotes']); ?></p>
-                <p><strong>Description:</strong> <?php echo htmlspecialchars($movie['description']); ?></p>
-                <?php if (!$userReviewed): ?>
-                    <button class="btn btn-success" onclick="openRatePopup()">Rate</button>
-                <?php endif; ?>
+                <div class="movie-info">
+                    <p><strong>Movie:</strong> <b><?php echo htmlspecialchars($movie['title']); ?></b></p>
+                    <p><strong>Director:</strong> <?php echo htmlspecialchars($movie['director']); ?></p>
+                    <p><strong>Actors:</strong> <?php echo htmlspecialchars($movie['actor']) . ', ' . htmlspecialchars($movie['actor2']); ?></p>
+                    <p><strong>Genre:</strong> <?php echo htmlspecialchars($movie['genre']) . ', ' . htmlspecialchars($movie['genre2']); ?></p>
+                    <p><strong>IMDb:</strong> <?php echo htmlspecialchars($movie['rating']); ?>/10</p>
+                    <p><strong>Release:</strong> <em>( <?php echo htmlspecialchars($movie['release_date']); ?> )</em></p>
+                    <p><strong>Country:</strong> <?php echo htmlspecialchars($movie['country']); ?></p>
+                    <p><strong>SeenePoll:</strong> <?php echo number_format($averageRating, 1); ?>/10</p>
+                    <p><strong>IMDb Votes:</strong> <?php echo number_format($movie['imdbVotes']); ?></p>
+                    <p><strong>Duration:</strong> <?php echo number_format($movie['minute']); ?> min</p>
+                    <p><?php echo htmlspecialchars($movie['description']); ?></p>
+                    <?php if (!$userReviewed): ?>
+                        <button class="btn btn-success" onclick="openRatePopup()">Rate</button>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>

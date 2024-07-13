@@ -2,20 +2,12 @@
 session_start();
 
 if (!isset($_SESSION['admin_id'], $_SESSION['admin_username'])) {
-    header("Location: ../../src/logout.php");
+    header("Location: ../../logout.php");
     exit;
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "seenema";
+include '../../connection.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 if (isset($_GET['userID'])) {
     $userID = $_GET['userID'];

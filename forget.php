@@ -1,15 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $host = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "seenema";
-
-    $conn = new mysqli($host, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die(json_encode(["status" => "error", "message" => "Connection failed: " . $conn->connect_error]));
-    }
+    include 'connection.php';
 
     $email = filter_var($_POST['forget-email'], FILTER_SANITIZE_EMAIL);
     $favdish = $_POST['forget-favdish'];

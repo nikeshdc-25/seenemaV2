@@ -1,20 +1,11 @@
 <?php
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: ../../src/logout.php");
+    header("Location: ../../logout.php");
     exit;
 }
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "seenema";
+include '../../connection.php';
 
-$conn = new mysqli($host, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    error_log("Connection failed: " . $conn->connect_error);
-    die("Connection failed: " . $conn->connect_error);
-}
 
 $adminName = $_POST['adminName'];
 $adminPassword = password_hash($_POST['adminPassword'], PASSWORD_DEFAULT);

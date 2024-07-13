@@ -2,15 +2,7 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $host = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "seenema";
-
-    $conn = new mysqli($host, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include '../connection.php';
 
     $movieID = isset($_POST['movieID']) ? (int)$_POST['movieID'] : 0;
     $userID = isset($_POST['userID']) ? (int)$_POST['userID'] : 0;

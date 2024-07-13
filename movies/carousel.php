@@ -1,14 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "seenema";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include '../connection.php';
 
 $sql = "SELECT title, poster, description, rating, release_date, genre, genre2, minute FROM movies ORDER BY imdbVotes DESC LIMIT 12";
 $result = $conn->query($sql);

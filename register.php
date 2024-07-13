@@ -14,15 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(["status" => "error", "message" => "Passwords do not match!"]);
         exit();
     }
-    $host = "localhost";
-    $dbUsername = "root";
-    $dbPassword = "";
-    $dbName = "seenema";
-
-    $conn = new mysqli($host, $dbUsername, $dbPassword, $dbName);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include 'connection.php';
   
     $stmt = $conn->prepare("SELECT email FROM userdata WHERE email = ?");
     $stmt->bind_param("s", $email);

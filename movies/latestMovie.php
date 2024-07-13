@@ -2,17 +2,7 @@
 header('Content-Type: application/json');
 session_start();
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "seenema";
-
-$conn = new mysqli($host, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    echo json_encode(["status" => "error", "message" => "Connection failed: " . $conn->connect_error]);
-    exit;
-}
+include '../connection.php';
 
 $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : 0;
 

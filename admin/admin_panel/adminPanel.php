@@ -2,20 +2,12 @@
 session_start();
 
 if (!isset($_SESSION['admin_id'], $_SESSION['admin_username'])) {
-    header("Location: ../../src/logout.php");
+    header("Location: ../../logout.php");
     exit;
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "seenema";
+include '../../connection.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Pagination setup
 $perPage = 9;
@@ -174,7 +166,7 @@ $conn->close();
                 <a href="userhandling.php" id="userhandle" class="btn btn-secondary">Users</a>
                 <a href="upload.php" id="uploadMoviesBtn" class="btn btn-info">Add Movie</a>
                 <a href="addedAdmin.php" id="addAdminBtn" class="btn btn-primary">Add Admin</a>
-                <a href="../../src/logout.php" id="homeBtn" class="btn btn-danger">Logout</a>
+                <a href="../../logout.php" id="homeBtn" class="btn btn-danger">Logout</a>
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">

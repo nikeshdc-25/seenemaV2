@@ -1,17 +1,8 @@
 <?php
 header('Content-Type: application/json');
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "seenema";
+include '../connection.php';
 
-$conn = new mysqli($host, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    echo json_encode(["status" => "error", "message" => "Connection failed: " . $conn->connect_error]);
-    exit;
-}
 
 $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
 $searchTerm = $conn->real_escape_string($searchTerm);

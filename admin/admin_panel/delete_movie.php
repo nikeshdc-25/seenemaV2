@@ -1,24 +1,14 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: ../../src/logout.php");
+    header("Location: ../../logout.php");
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $movieId = $_POST['movie_id'];
+    include '../../connection.php';
 
-    $dbHost = 'localhost';
-    $dbUsername = 'root';
-    $dbPassword = '';
-    $dbName = 'seenema';
-
-    $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
-
-    if ($conn->connect_error) {
-        echo json_encode(['status' => 'error', 'message' => 'Database connection failed']);
-        exit;
-    }
 
     $stmt = $conn->prepare("DELETE FROM movies WHERE movieID = ?");
     $stmt->bind_param("i", $movieId);

@@ -1,15 +1,7 @@
 <?php
 session_start();
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "seenema";
-
-$conn = new mysqli($host, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include '../connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $commentID = isset($_POST['commentID']) ? $_POST['commentID'] : null;

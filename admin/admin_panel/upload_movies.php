@@ -3,21 +3,12 @@
 header('Content-Type: application/json');
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: ../../src/logout.php");
+    header("Location: ../../logout.php");
     exit;
 }
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "seenema";
+include '../../connection.php';
 
-$conn = new mysqli($host, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    echo json_encode(["status" => "error", "message" => "Connection failed: " . $conn->connect_error]);
-    exit;
-}
 
 $title = $_POST['title'];
 $director = $_POST['director'];

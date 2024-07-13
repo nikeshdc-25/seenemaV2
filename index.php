@@ -8,7 +8,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seenema</title>
-    <link rel="icon" href="../seenema_img/seenemaLogo.png">
+    <link rel="icon" href="./seenema_img/seenemaLogo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -31,7 +31,7 @@ session_start();
 </head>
 <body id="top">
     <header class="d-flex align-items-center justify-content-left logo-container">
-        <img src="../seenema_img/seenemaLogo.png" alt="Seenema Logo" class="me-2">
+        <img src="./seenema_img/seenemaLogo.png" alt="Seenema Logo" class="me-2">
         <a href="#" class="seenemaTxt">SEENEMA</a> 
     </header>
     <aside class="button-container d-flex justify-content-center align-items-center flex-wrap">
@@ -346,7 +346,7 @@ session_start();
         });
 
         function fetchUserFavorites() {
-        return fetch('../movies/favoriteMovie.php')
+        return fetch('./movies/favoriteMovie.php')
             .then(response => response.json())
             .then(data => {
                 userFavorites = data.map(favorite => favorite.movieID);
@@ -363,7 +363,7 @@ session_start();
 
         //Pagination Starts here:
         function fetchMoviesFromFetchMoviesPHP(page = 1) {
-            fetch(`../movies/fetch_movies.php?page=${page}`)
+            fetch(`./movies/fetch_movies.php?page=${page}`)
                 .then(response => response.json())
                 .then(data => {
                     movieContainer.innerHTML = '';
@@ -393,7 +393,7 @@ session_start();
         }
         //For All Movies
         function fetchAllMoviesFromAllMoviePHP() {
-            fetch('../movies/allMovie.php')
+            fetch('./movies/allMovie.php')
                 .then(response => response.json())
                 .then(data => {
                     movieContainer.innerHTML = '';
@@ -409,7 +409,7 @@ session_start();
 
         //For Featured Movies:
         function fetchFeaturedMoviesFromFeatureMoviePHP() {
-            fetch('../movies/featureMovie.php')
+            fetch('./movies/featureMovie.php')
                 .then(response => response.json())
                 .then(data => {
                     movieContainer.innerHTML = '';
@@ -425,7 +425,7 @@ session_start();
 
         //For Latest Movies:
         function fetchLatestMoviesFromLatestPHP() {
-            fetch('../movies/latestMovie.php')
+            fetch('./movies/latestMovie.php')
                 .then(response => response.json())
                 .then(data => {
                     movieContainer.innerHTML = '';
@@ -458,7 +458,7 @@ session_start();
         });
 
         function fetchMoviesFromQuickSearch(searchTerm) {
-            fetch(`../movies/quickSearch.php?search=${encodeURIComponent(searchTerm)}`)
+            fetch(`./movies/quickSearch.php?search=${encodeURIComponent(searchTerm)}`)
                 .then(response => response.json())
                 .then(data => {
                     movieContainer.innerHTML = '';
@@ -490,7 +490,7 @@ session_start();
 
         // For Favorite Movies:
         favMoviesButton.addEventListener('click', function() {
-            fetch('../movies/favoriteMovie.php')
+            fetch('./movies/favoriteMovie.php')
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'error' && data.message === 'User not logged in') {
@@ -595,7 +595,7 @@ session_start();
         fetchMoviesForCarousel();
 
         function fetchMoviesForCarousel() {
-            fetch('../movies/carousel.php')
+            fetch('./movies/carousel.php')
                 .then(response => response.json())
                 .then(data => {
                     carouselInner.innerHTML = '';  // Clear previous carousel items if any
@@ -647,7 +647,7 @@ session_start();
                 </div>
             `;
             card.addEventListener('click', function() {
-                window.location.href = `../movies/movieOverview.php?title=${encodeURIComponent(movie.title)}`;
+                window.location.href = `./movies/movieOverview.php?title=${encodeURIComponent(movie.title)}`;
             });
             return card;
         }
@@ -695,7 +695,7 @@ session_start();
             movieCard.appendChild(title);
 
             movieCard.addEventListener('click', function() {
-                window.location.href = `../movies/movieOverview.php?title=${encodeURIComponent(movie.title)}`;
+                window.location.href = `./movies/movieOverview.php?title=${encodeURIComponent(movie.title)}`;
             });
 
             return movieCard;
@@ -703,7 +703,7 @@ session_start();
 
         //For Favorite Icon Toggle function
         function toggleFavorite(movieID, favoriteIcon) {
-            fetch('../movies/favorites.php', {
+            fetch('./movies/favorites.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

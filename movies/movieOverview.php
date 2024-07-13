@@ -1,15 +1,7 @@
 <?php
 session_start();
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "seenema";
-
-$conn = new mysqli($host, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include '../connection.php';
 
 function getMovieDetails($conn, $movieTitle) {
     $sql = "SELECT movieID, title, director, actor, poster, description, rating, genre, genre2, actor2, minute, release_date, country, imdbVotes FROM movies WHERE title = ?";
@@ -439,7 +431,7 @@ input[type="radio"]:checked ~ label.star:hover ~ .star {
 
         if (userID == null) {
             storeNotificationAndReload("Please log in to rate this movie.", 'error');
-            window.location.href = '../src/logout.php';
+            window.location.href = '../logout.php';
             return;
         }
         // Censor vulgar words

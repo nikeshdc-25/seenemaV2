@@ -3,24 +3,15 @@ header('Content-Type: application/json');
 session_start();
 
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: ../../src/logout.php");
+    header("Location: ../../logout.php");
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['movie_id'])) {
     $movieID = $_POST['movie_id'];
 
-    $host = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "seenema";
+    include '../../connection.php';
 
-    $conn = new mysqli($host, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        echo json_encode(["status" => "error", "message" => "Connection failed: " . $conn->connect_error]);
-        exit;
-    }
 
     if (!empty($_POST['title'])) {
         $title = $_POST['title'];

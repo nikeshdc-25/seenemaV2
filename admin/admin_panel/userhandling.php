@@ -2,20 +2,12 @@
 session_start();
 
 if (!isset($_SESSION['admin_id'], $_SESSION['admin_username'])) {
-    header("Location: ../../src/logout.php");
+    header("Location: ../../logout.php");
     exit;
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "seenema";
+include '../../connection.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 function logDeletion($adminName, $deletedUser) {
     $logFile = 'log.txt';
@@ -87,7 +79,7 @@ $conn->close();
             <h2 class="text-center">User Details</h2>
             <div class="d-flex justify-content-center flex-wrap">
                 <a href="adminPanel.php" class="btn btn-primary">Back to Admin Panel</a>
-                <a href="../../src/logout.php" class="btn btn-danger">Logout</a>
+                <a href="../../logout.php" class="btn btn-danger">Logout</a>
             </div>
         </div>
         <table class="table">

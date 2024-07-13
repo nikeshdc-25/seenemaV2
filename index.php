@@ -263,7 +263,7 @@ session_start();
             <div class="row">
                 <div class="col-md-4">
                     <h3>Contact Me</h3>
-                    <p>Email: nutternikexdx@gmail.com</p>
+                    <p>Email: nikeshdhakal25@gmail.com</p>
                     <p>Phone: +977 9848050240</p>
                 </div>
                 <div class="col-md-4">
@@ -590,67 +590,90 @@ session_start();
         }
 
         // For Carousel:
-        const carouselInner = document.querySelector('.carousel-inner');
+const carouselInner = document.querySelector('.carousel-inner');
 
-        fetchMoviesForCarousel();
+fetchMoviesForCarousel();
 
-        function fetchMoviesForCarousel() {
-            fetch('./movies/carousel.php')
-                .then(response => response.json())
-                .then(data => {
-                    carouselInner.innerHTML = '';  // Clear previous carousel items if any
-                    const chunkSize = 3;
-                    let chunks = [];
+function fetchMoviesForCarousel() {
+    fetch('./movies/carousel.php')
+        .then(response => response.json())
+        .then(data => {
+            carouselInner.innerHTML = '';  // Clear previous carousel items if any
+            let chunkSize = getChunkSize();
 
-                    for (let i = 0; i < data.movies.length; i += chunkSize) {
-                        chunks.push(data.movies.slice(i, i + chunkSize));
+            for (let i = 0; i < data.movies.length; i += chunkSize) {
+                const chunk = data.movies.slice(i, i + chunkSize);
+                const carouselItem = document.createElement('div');
+                carouselItem.classList.add('carousel-item');
+                if (i === 0) {
+                    carouselItem.classList.add('active');
+                }
+
+                const row = document.createElement('div');
+                row.classList.add('row', 'w-100', 'd-flex', 'justify-content-center');
+
+                chunk.forEach(movie => {
+                    const carouselMovieCard = createCarouselMovieCard(movie, chunkSize);
+                    const col = document.createElement('div');
+                    if (chunkSize === 1) {
+                        col.classList.add('col-12');
+                    } else if (chunkSize === 2) {
+                        col.classList.add('col-md-6');
+                    } else {
+                        col.classList.add('col-md-4');
                     }
+                    col.appendChild(carouselMovieCard);
+                    row.appendChild(col);
+                });
 
-                    chunks.forEach((chunk, index) => {
-                        const carouselItem = document.createElement('div');
-                        carouselItem.classList.add('carousel-item');
-                        if (index === 0) {
-                            carouselItem.classList.add('active');
-                        }
+                carouselItem.appendChild(row);
+                carouselInner.appendChild(carouselItem);
+            }
+        })
+        .catch(error => console.error('Error fetching movies from carousel.php:', error));
+}
 
-                        const row = document.createElement('div');
-                        row.classList.add('row', 'w-100', 'd-flex', 'justify-content-center');
+function createCarouselMovieCard(movie) {
+    const card = document.createElement('div');
+    card.classList.add('carousel-movie-card', 'mt-2');
+    const truncatedDescription = movie.description.length > 100 ? movie.description.substring(0, 100) + '...' : movie.description;
+    card.innerHTML = `
+        <img src="${movie.poster}" class="card-img-top" alt="${movie.title}">
+        <div class="card-body d-flex flex-column justify-content-between">
+            <h4 class="card-title pt-3">${movie.title}</h4>
+            <div class="footer-content">
+                <p class="card-text">${truncatedDescription}</p>
+                <h4 class="card-text"><i class="fa-solid fa-heart"></i> ${movie.rating} ⬝ ${movie.release_date} ⬝ ${movie.minute} min</h4>
+                <h4 class="card-text" style="color:#d3d3d3; font-weight: 700;">${movie.genre}      ${movie.genre2}</h4>
+            </div>
+        </div>
+    `;
+    card.addEventListener('click', function() {
+        window.location.href = `./movies/movieOverview.php?title=${encodeURIComponent(movie.title)}`;
+    });
+    return card;
+}
 
-                        chunk.forEach(movie => {
-                            const carouselMovieCard = createCarouselMovieCard(movie);
-                            const col = document.createElement('div');
-                            col.classList.add('col-md-4');
-                            col.appendChild(carouselMovieCard);
-                            row.appendChild(col);
-                        });
+function getChunkSize() {
+    if (window.innerWidth < 768) {
+        return 1;
+    } else if (window.innerWidth < 1200) {
+        return 2;
+    }
+    else {
+        return 3;
+    }
+}
 
-                        carouselItem.appendChild(row);
-                        carouselInner.appendChild(carouselItem);
-                    });
-                })
-                .catch(error => console.error('Error fetching movies from carousel.php:', error));
-        }
+// Re-fetch movies on window resize to adjust chunk size
+window.addEventListener('resize', function() {
+    const currentChunkSize = getChunkSize();
+    if (currentChunkSize !== chunkSize) {
+        chunkSize = currentChunkSize;
+        fetchMoviesForCarousel();
+    }
+});
 
-        function createCarouselMovieCard(movie) {
-            const card = document.createElement('div');
-            card.classList.add('carousel-movie-card', 'mt-2');
-            const truncatedDescription = movie.description.length > 100 ? movie.description.substring(0, 100) + '...' : movie.description;
-            card.innerHTML = `
-                <img src="${movie.poster}" class="card-img-top" alt="${movie.title}">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <h4 class="card-title pt-3">${movie.title}</h4>
-                    <div class="footer-content">
-                        <p class="card-text">${truncatedDescription}</p>
-                        <h4 class="card-text"><i class="fa-solid fa-heart"></i> ${movie.rating} ⬝ ${movie.release_date} ⬝ ${movie.minute} min</h4>
-                        <h4 class="card-text" style="color:#d3d3d3; font-weight: 700;">${movie.genre}      ${movie.genre2}</h4>
-                    </div>
-                </div>
-            `;
-            card.addEventListener('click', function() {
-                window.location.href = `./movies/movieOverview.php?title=${encodeURIComponent(movie.title)}`;
-            });
-            return card;
-        }
 
         //For movie cards:
         function createMovieCard(movie) {

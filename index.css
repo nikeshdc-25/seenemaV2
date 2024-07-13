@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: rgb(39, 39, 39);
     display: flex;
     flex-direction: column;
@@ -30,11 +30,13 @@ p {
     flex: 1;
     display: flex;
 }
+
+
+/*For Carousel CSS:*/
 .carousel{
     border-bottom: 1px solid rgb(85, 85, 85);
 }
 
-/*For Carousel CSS:*/
 .carousel-movie-card {
     display: flex;
     width: 104%;
@@ -870,7 +872,7 @@ input {
     color: #fff;
 }
 
-/*For Responsiveness*/
+/* For Responsiveness */
 @media (max-width: 768px) {
     .seenemaTxt {
         font-size: 36px;
@@ -901,9 +903,49 @@ input {
         margin-left: 0;
         text-align: center;
     }
-    
     #movieTitle {
         font-size: 20px;
     }
+    .carousel-movie-card .card-title {
+        font-size: 1.2em;
+        color: #ffffff;
+    }
+    .carousel-movie-card .card-text {
+        font-size: 1em;
+        color: #8b8b8b;
+    }
 }
 
+@media (max-width: 480px) {
+    .carousel-movie-card .card-body {
+        height: 10rem;
+    }
+    .carousel-movie-card img {
+        width: 100%;
+        max-height: 15rem;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 430px) {
+    .carousel-movie-card .card-title {
+        font-size: 1em;
+        color: #ffffff;
+    }
+    .carousel-movie-card .card-text {
+        font-size: 0.75em;
+        color: #8b8b8b;
+    }
+}
+
+@media (max-width: 395px) {
+    .carousel-movie-card .card-title {
+        font-size: 1em;
+        color: #ffffff;
+    }
+    .carousel-movie-card .card-text {
+        font-size: 0.6em;
+        color: #8b8b8b;
+    }
+}

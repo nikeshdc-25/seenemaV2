@@ -34,34 +34,40 @@ session_start();
         <img src="./seenema_img/seenemaLogo.png" alt="Seenema Logo" class="me-2">
         <a href="#" class="seenemaTxt">SEENEMA</a> 
     </header>
-    <aside class="button-container d-flex justify-content-center align-items-center flex-wrap">
-        <button class="curved-button" title="Home" id="homeButton"><i class="fas fa-home"></i></button>
-        <button class="curved-button" id="featuredButton" title="Feature">Featured Movie</button>
-        <button class="curved-button" id="latestButton" title="Latest">Latest</button>
-        <button class="curved-button" id="allMoviesButton" title="All Movies">All Movies</button>
-        <button class="curved-button" id="favMoviesButton" title="Favorites">Favorites</button>
-        <button id="filterButton" class="curved-button filter-toggle" type="button">Filter</button>           
-        <div class="search-container d-flex align-items-center">
-            <input type="text" id="quickSearchInput" class="form-control me-2" placeholder="Quick Search..." aria-label="Search">
-            <button  id="quickSearchButton" class="search-button curved-button" title="Search"><i class="fas fa-search"></i></button>
+    <nav class="navbar navbar-expand-lg navbar-light button-container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center align-items-center" id="navbarSupportedContent">
+            <ul class="navbar-nav justify-content-start align-items-start mx-2">
+                <button class="curved-button" title="Home" id="homeButton"><i class="fas fa-home"></i></button>
+                <button class="curved-button" id="featuredButton" title="Feature">Features</button>
+                <button class="curved-button" id="latestButton" title="Latest">Latests</button>
+                <button class="curved-button" id="allMoviesButton" title="All Movies">All Movies</button>
+                <button class="curved-button" id="favMoviesButton" title="Favorites">Favorites</button>
+                <button id="filterButton" class="curved-button filter-toggle" type="button">Filter</button>           
+                <div class="search-container d-flex align-items-center">
+                    <input type="text" id="quickSearchInput" class="form-control me-2" placeholder="Quick Search..." aria-label="Search">
+                    <button  id="quickSearchButton" class="search-button curved-button" title="Search"><i class="fas fa-search"></i></button>
+                </div>
+                <?php if (isset($_SESSION['userID'], $_SESSION['userName'], $_SESSION['userPassword'])): ?>
+                    <div class="user-container">
+                    <button class="user-logo" type="button" id="userButton" aria-expanded="false">
+                        <i class="fas fa-user-circle" style="font-size: 35px;"></i>
+                    </button>
+                    <div id="userMenu" class="user-menu" style="display: none;">
+                        <p id="userMessage"></p>
+                        <button id="logoutButton" class="logout-button" title="Logout">
+                            <i class="fas fa-sign-out">Logout</i>
+                        </button>
+                    </div>
+                </div>
+                <?php else: ?>
+                    <button class="curved-button signup-button" title="Login">Login</button>
+                <?php endif; ?>
+            </ul>
         </div>
-        <?php if (isset($_SESSION['userID'], $_SESSION['userName'], $_SESSION['userPassword'])): ?>
-            <div class="user-container d-flex align-items-center">
-            <button class="user-logo" type="button" id="userButton" aria-expanded="false">
-                <i class="fas fa-user-circle" style="font-size: 35px;"></i>
-            </button>
-            <div id="userMenu" class="user-menu" style="display: none;">
-                <p id="userMessage"></p>
-                <button id="logoutButton" class="logout-button" title="Logout">
-                    <i class="fas fa-sign-out">Logout</i>
-                </button>
-            </div>
-        </div>
-        <?php else: ?>
-            <button class="curved-button signup-button" title="Login">Login</button>
-        <?php endif; ?>
-    </aside>
-
+    </nav>
     <div class="filter-bar">
         <nav class="d-flex align-items-center justify-content-center flex-wrap">
             <div class="form-group">
@@ -156,9 +162,8 @@ session_start();
             <button class="search-filter" title="Search" type="submit"><i class="fas fa-search"></i></button>
         </nav>
     </div>
-    <main class="col-12">
-        <!-- Carousel -->
-        <div id="featureCarousel" class="carousel slide m-4" data-ride="carousel">
+    <!-- Carousel -->
+    <div id="featureCarousel" class="carousel slide m-2" data-ride="carousel">
         <span style="color: #8b8b8b; font-weight: 700;" class="pl-3"><i class="fa-solid fa-thumbs-up" style="font-size:20px; color:darkorange;"></i> Recommended Movies:</span>
             <div id="carouselInner" class="carousel-inner"></div>
             <a class="carousel-control-prev" href="#featureCarousel" role="button" data-slide="prev">
@@ -168,7 +173,7 @@ session_start();
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </a>
         </div>
-
+    <main class="col-14">
         <!--For Movie Cards Display-->
         <div class="movie-container d-flex justify-content-center flex-wrap"></div>
         <!--For Pagination Display-->
@@ -346,15 +351,21 @@ session_start();
         });
 
         function fetchUserFavorites() {
-        return fetch('./movies/favoriteMovie.php')
-            .then(response => response.json())
-            .then(data => {
-                userFavorites = data.map(favorite => favorite.movieID);
-            })
-            .catch(error => {
-                console.error('Error fetching user favorites:', error);
-                userFavorites = [];
-            });
+            return fetch('./movies/favoriteMovie.php')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Fetched data:', data); // Log the data to inspect its structure
+                    if (Array.isArray(data)) {
+                        userFavorites = data.map(favorite => favorite.movieID);
+                    } else {
+                        console.error('Data is not an array:', data);
+                        userFavorites = [];
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching user favorites:', error);
+                    userFavorites = [];
+                });
         }
 
         fetchUserFavorites()
@@ -551,7 +562,7 @@ session_start();
                     genre: genre
                 });
                 
-                fetch(`../movies/filterMovie.php?${queryParams.toString()}`)
+                fetch(`./movies/filterMovie.php?${queryParams.toString()}`)
                     .then(response => response.json())
                     .then(data => {
                         movieContainer.innerHTML = '';
@@ -593,13 +604,12 @@ session_start();
 const carouselInner = document.querySelector('.carousel-inner');
 
 fetchMoviesForCarousel();
-
+let chunkSize = getChunkSize();
 function fetchMoviesForCarousel() {
     fetch('./movies/carousel.php')
         .then(response => response.json())
         .then(data => {
             carouselInner.innerHTML = '';  // Clear previous carousel items if any
-            let chunkSize = getChunkSize();
 
             for (let i = 0; i < data.movies.length; i += chunkSize) {
                 const chunk = data.movies.slice(i, i + chunkSize);

@@ -37,12 +37,12 @@ session_start();
         <img src="./seenema_img/seenemaLogo.png" alt="Seenema Logo" class="me-2">
         <a href="#" class="seenemaTxt">SEENEMA</a>
     </header>
-    <nav class="navbar navbar-expand-lg navbar-light button-container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-light button-container d-flex flex-row">
+    <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon btn btn-danger"></span>
+    </button>
         <div class="collapse navbar-collapse justify-content-center align-items-center" id="navbarSupportedContent">
-            <ul class="navbar-nav justify-content-start align-items-start mx-2">
+            <ul class="navbar-nav justify-content-start align-items-start m-4">
                 <button class="curved-button" title="Home" id="homeButton"><i class="fas fa-home"></i></button>
                 <button class="curved-button" id="featuredButton" title="Feature">Features</button>
                 <button class="curved-button" id="latestButton" title="Latest">Latest</button>

@@ -777,7 +777,7 @@ input {
 }
 
 .user-menu {
-    position: relative;
+    position: fixed;
     background-color: #232225;
     border: 1px solid #e0e0e0;
     padding: 15px;

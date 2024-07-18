@@ -327,7 +327,6 @@ main {
     font-size: 18px;
     font-family:monospace;
     transition: all 0.4s ease;
-    position: relative;
     overflow: hidden;
     position: relative;
     box-shadow: 0 4px 8px rgba(2, 2, 2, 0.7);
@@ -372,7 +371,6 @@ main {
     font-size: 18px;
     font-family:monospace;
     transition: all 0.4s ease;
-    position: relative;
     overflow: hidden;
     position: relative;
 }
@@ -548,7 +546,7 @@ main {
     background: #000000;
     color: #ffffff;
     text-align: center;
-    line-height: 27px;
+    line-height: 22px;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -562,7 +560,7 @@ main {
     width: 28px;
     height: 28px;
     text-align: center;
-    line-height: 30px;
+    line-height: 25px;
     border-radius: 50px;
     font-size: 30px;
 }

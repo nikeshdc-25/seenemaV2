@@ -371,6 +371,7 @@ main {
     font-size: 18px;
     font-family:monospace;
     transition: all 0.4s ease;
+    position: relative;
     overflow: hidden;
     position: relative;
 }
@@ -546,7 +547,7 @@ main {
     background: #000000;
     color: #ffffff;
     text-align: center;
-    line-height: 22px;
+    line-height: 27px;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -560,7 +561,7 @@ main {
     width: 28px;
     height: 28px;
     text-align: center;
-    line-height: 25px;
+    line-height: 30px;
     border-radius: 50px;
     font-size: 30px;
 }

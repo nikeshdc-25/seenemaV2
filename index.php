@@ -41,10 +41,7 @@ session_start();
         <button class="navbar-toggler btn btn-success" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="search-container d-flex align-items-center d-lg-none"> <!-- Always visible on small screens -->
-            <input type="text" id="1 quickSearchInput" class="form-control me-2" placeholder="Quick Search..." aria-label="Search">
-            <button id="quickSearchButton" class="search-button curved-button" title="Search"><i class="fas fa-search"></i></button>
-        </div>
+        
         <div class="collapse navbar-collapse justify-content-center align-items-center" id="navbarSupportedContent">
             <ul class="navbar-nav justify-content-start align-items-start mx-2">
                 <button class="curved-button" title="Home" id="homeButton"><i class="fas fa-home"></i></button>
@@ -53,10 +50,6 @@ session_start();
                 <button class="curved-button" id="allMoviesButton" title="All Movies">All Movies</button>
                 <button class="curved-button" id="favMoviesButton" title="Favorites">Favorites</button>
                 <button id="filterButton" class="curved-button filter-toggle" type="button">Filter</button>
-                <div class="search-container d-flex align-items-center d-none d-lg-flex"> <!-- Hidden on small screens -->
-                    <input type="text" id="quickSearchInput" class="form-control me-2" placeholder="Quick Search..." aria-label="Search">
-                    <button id="quickSearchButton" class="search-button curved-button" title="Search"><i class="fas fa-search"></i></button>
-                </div>
                 <?php if (isset($_SESSION['userID'], $_SESSION['userName'], $_SESSION['userPassword'])) : ?>
                     <div class="user-container">
                         <button class="user-logo" type="button" id="userButton" aria-expanded="false">
@@ -73,6 +66,10 @@ session_start();
                     <button class="curved-button signup-button" title="Login">Login</button>
                 <?php endif; ?>
             </ul>
+        </div>
+        <div class="search-container d-flex">
+            <input type="text" id="quickSearchInput" class="form-control me-2" placeholder="Quick Search..." aria-label="Search">
+            <button id="quickSearchButton" class="search-button curved-button" title="Search"><i class="fas fa-search"></i></button>
         </div>
     </nav>
 
@@ -183,7 +180,6 @@ session_start();
     </div>
     <main class="container-fluid">
         <!--For Movie Cards Display-->
-        <span class="px-5" style="color: #8b8b8b; font-weight: 700;"><i class="fa-solid fa-film" style="font-size:20px; color:darkorange;"></i> Browse Movies:</span>
         <div class="movie-container d-flex justify-content-center flex-wrap"></div>
         <!--For Pagination Display-->
         <div class="pagination-container"></div>

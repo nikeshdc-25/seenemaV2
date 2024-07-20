@@ -228,7 +228,7 @@ main {
     font-family: cursive;
     text-align: center;
     width: 100%;
-    margin-bottom: -20px;
+    margin-bottom: auto;
 }
 .filter-tag{
     background-color:#b2b2b2;
@@ -862,7 +862,6 @@ input {
 }
 
 /* For Responsiveness */
-
 @media (max-width: 1036px) {
     .seenemaTxt {
         font-size: 36px;
@@ -881,10 +880,7 @@ input {
         font-size: 16px;
     }
     .search-container input[type="text"] {
-        width: 100%;
-    }
-    .search-button {
-        margin-top: 10px;
+        width: 90%;
     }
     .form-control {
         width: 100%;

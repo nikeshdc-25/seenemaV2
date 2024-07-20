@@ -547,7 +547,7 @@ main {
     background: #000000;
     color: #ffffff;
     text-align: center;
-    line-height: 27px;
+    line-height: 22px;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -561,7 +561,7 @@ main {
     width: 28px;
     height: 28px;
     text-align: center;
-    line-height: 30px;
+    line-height: 25px;
     border-radius: 50px;
     font-size: 30px;
 }

@@ -228,7 +228,7 @@ main {
     font-family: cursive;
     text-align: center;
     width: 100%;
-    margin-bottom: auto;
+    margin-bottom: -20px;
 }
 .filter-tag{
     background-color:#b2b2b2;

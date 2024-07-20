@@ -42,7 +42,7 @@ session_start();
             <ul class="navbar-nav justify-content-start align-items-start mx-2">
                 <button class="curved-button" title="Home" id="homeButton"><i class="fas fa-home"></i></button>
                 <button class="curved-button" id="featuredButton" title="Feature">Features</button>
-                <button class="curved-button" id="latestButton" title="Latest">Latests</button>
+                <button class="curved-button" id="latestButton" title="Latest">Latest</button>
                 <button class="curved-button" id="allMoviesButton" title="All Movies">All Movies</button>
                 <button class="curved-button" id="favMoviesButton" title="Favorites">Favorites</button>
                 <button id="filterButton" class="curved-button filter-toggle" type="button">Filter</button>           

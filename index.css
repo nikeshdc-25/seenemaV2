@@ -371,7 +371,6 @@ main {
     font-size: 18px;
     font-family:monospace;
     transition: all 0.4s ease;
-    position: relative;
     overflow: hidden;
     position: relative;
 }

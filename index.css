@@ -135,7 +135,7 @@ main {
     flex-wrap: wrap;
     overflow-y: auto;
     padding: 20px;
-    gap: 40px;
+    gap: 30px;
     background-color: rgb(39, 39, 39);
     position: relative;
     padding-bottom: 10px;
@@ -863,6 +863,7 @@ input {
 }
 
 /* For Responsiveness */
+
 @media (max-width: 1036px) {
     .seenemaTxt {
         font-size: 36px;
@@ -904,6 +905,9 @@ input {
         font-size: 1em;
         color: #8b8b8b;
     }
+    .movie-container {
+        gap: 10px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -924,6 +928,10 @@ input {
         font-size: 0.7em !important;
         color: #8b8b8b;
     }
+    .movie-container {
+        gap: 5px;
+    }
+    
 }
 
 @media (max-width: 430px) {
@@ -943,6 +951,9 @@ input {
     }
     .carousel-movie-card .card-body {
         height: 10rem;
+    }
+    .movie-container {
+        gap: 5px;
     }
 }
 

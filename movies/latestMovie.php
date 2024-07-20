@@ -4,6 +4,11 @@ session_start();
 
 include '../connection.php';
 
+if (!$conn) {
+    echo json_encode(['error' => 'Failed to connect to the database.']);
+    exit;
+}
+
 $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : 0;
 
 $sql = "SELECT m.movieID, m.title, m.director, m.actor, m.genre, m.country, m.description, m.poster, m.release_date, m.rating, m.imdbVotes, 
@@ -13,9 +18,20 @@ $sql = "SELECT m.movieID, m.title, m.director, m.actor, m.genre, m.country, m.de
         ORDER BY m.release_date DESC
         LIMIT 21";
 $stmt = $conn->prepare($sql);
+
+if ($stmt === false) {
+    echo json_encode(['error' => 'Failed to prepare the SQL statement.']);
+    exit;
+}
+
 $stmt->bind_param("i", $userID);
 $stmt->execute();
 $result = $stmt->get_result();
+
+if ($result === false) {
+    echo json_encode(['error' => 'Failed to execute the SQL statement.']);
+    exit;
+}
 
 $movies = [];
 

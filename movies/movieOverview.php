@@ -253,7 +253,7 @@ input[type="radio"]:checked ~ label.star:hover ~ .star {
                     <p><strong>SeenePoll:</strong> <?php echo number_format($averageRating, 1); ?> /10</p>
                     <p><strong>IMDb Votes:</strong> <?php echo number_format($movie['imdbVotes']); ?></p>
                     <p><strong>Duration:</strong> <?php echo number_format($movie['minute']); ?> min</p>
-                    <p style="width: 190%"><?php echo htmlspecialchars($movie['description']); ?></p>
+                    <p class="col-sm-10 col-md-12 col-lg-14"><?php echo htmlspecialchars($movie['description']); ?></p>
                     <?php if (!$userReviewed): ?>
                         <button class="btn btn-success" onclick="openRatePopup()">Rate</button>
                     <?php endif; ?>

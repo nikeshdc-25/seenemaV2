@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2024 at 12:25 PM
+-- Generation Time: Jul 24, 2024 at 07:20 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -90,6 +90,7 @@ INSERT INTO `favorites` (`favoriteID`, `userID`, `movieID`) VALUES
 (120, 1, 1),
 (118, 1, 2),
 (135, 1, 3),
+(139, 1, 4),
 (137, 1, 5),
 (131, 2, 1),
 (130, 2, 2),
@@ -149,7 +150,7 @@ INSERT INTO `movies` (`movieID`, `title`, `director`, `actor`, `actor2`, `genre`
 (30, 'The Dark Knight', 'Christopher Nolan', 'Christian Bale', '', 'Action', '', 152, 'America', 'Batman has a new foe, the Joker, who is an accomplished criminal hell-bent on decimating Gotham City. Together with Gordon and Harvey Dent, Batman struggles to thwart the Joker before it is too late.', 'https://www.legendary.com/wp-content/uploads/2015/04/film_thedarkknight_featureimage_desktop_1600x9001-414x621.jpg', '2007-07-20', 9.0, 2890308),
 (31, 'Pulp Fiction', 'Quentin Tarantino', 'John Travolta', '', 'Crime', '', 154, 'America', 'In the realm of underworld, a series of incidents intertwines the lives of two Los Angeles mobsters, a gangster\'s wife, a boxer and two small-time criminals.', 'https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg', '1994-10-14', 8.9, 2236224),
 (32, 'Inception', 'Inception', 'Inception', '', 'Sci-Fi', '', 148, 'UK', 'Cobb steals information from his targets by entering their dreams. He is wanted for his alleged role in his wife\'s murder and his only chance at redemption is to perform a nearly impossible task.', 'https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p7825626_p_v8_ae.jpg', '2010-07-16', 8.8, 2567990),
-(33, 'The Godfather', 'Francis Ford Coppola', 'Marlon Brando', '', 'Crime', '', 175, 'USA', 'Don Vito Corleone, head of a mafia family, decides to hand over his empire to his youngest son, Michael. However, his decision unintentionally puts the lives of his loved ones in grave danger.', 'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg', '1972-03-24', 9.2, 2027179),
+(33, 'The Godfather', 'Francis Ford Coppola', 'Marlon Brando', '', 'Crime', 'Action', 175, 'USA', 'Don Vito Corleone, head of a mafia family, decides to hand over his empire to his youngest son, Michael. However, his decision unintentionally puts the lives of his loved ones in grave danger.', 'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg', '1972-03-24', 9.2, 2027179),
 (34, 'The Godfather Part II', 'Francis Ford Coppola', 'Al Pacino', '', 'Crime', '', 202, 'America', 'Vito\'s popularity in the underworld is on the rise, while his son, Michael\'s career is swinging downwards. In order to redeem himself, Michael must fight his enemies, including his own brother.', 'https://m.media-amazon.com/images/I/41V2AB34KCL._AC_UF894,1000_QL80_.jpg', '1974-12-20', 9.0, 1372726),
 (35, 'Schindler\'s List', 'Steven Spielberg', 'Liam Neeson', '', 'Biography', '', 195, 'America', 'Oscar Schindler, a successful and narcissistic German businessman, slowly starts worrying about the safety of his Jewish workforce after witnessing their persecution in Poland during World War II.', 'https://image.tmdb.org/t/p/original/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg', '1993-12-15', 9.0, 1460595),
 (36, 'Fight Club', 'David Fincher', 'Brad Pitt', '', 'Drama', '', 139, 'Germany', 'Unhappy with his capitalistic lifestyle, a white-collared insomniac forms an underground fight club with Tyler, a careless soap salesman. Soon, their venture spirals down into something sinister.', 'https://images.justwatch.com/poster/180839658/s718/fight-club.jpg', '1999-10-15', 8.8, 2342257),
@@ -187,7 +188,51 @@ INSERT INTO `movies` (`movieID`, `title`, `director`, `actor`, `actor2`, `genre`
 (68, 'Jackie I Am 21', 'Renasha Bantawa Rai', 'Dhiraj Magar', '', 'Drama', '', 100, 'Nepal', 'After being disqualified twice from being selected for the army, Jackie a young dancer sets out to pursue his dream against his father\'s will before time runs out.\r\n\r\n', 'https://m.media-amazon.com/images/M/MV5BMDY4OTkxNzAtMmFjMy00MTUzLWI1NmEtYTViMDlhNGY2M2MyXkEyXkFqcGdeQXVyMTM0Mzg0NzYy._V1_.jpg', '2023-05-04', 9.7, 6),
 (69, 'Captain', 'Diwakar Bhattarai', 'Anmol K.C.', '', 'Drama', '', 95, 'Nepal', 'Father\'s dedication to guiding his son to becoming a better footballer.\r\n\r\n', 'https://m.media-amazon.com/images/M/MV5BMGIyNTRhNWEtMjQxMi00YjA4LWEzODMtNmE4Nzc4YjVmYWQxXkEyXkFqcGdeQXVyOTcyMjQwNDI@._V1_.jpg', '2019-03-01', 1.9, 106),
 (70, 'Chhadke', 'Nigam Shrestha', 'Bipin Karki', '', 'Action', '', 120, 'Nepal', 'The film tells the story of three childhood friends. The trio all had dreams to fulfill \'when they grew up\', but time and destiny seem to have other plans for them.\r\n\r\n', 'https://m.media-amazon.com/images/M/MV5BMjc2MzA5MDktOTBkOC00NjAwLWFjZmMtN2IxMGFlNzI5NDVmXkEyXkFqcGdeQXVyNTEwOTEzNDk@._V1_.jpg', '2013-02-22', 6.3, 117),
-(71, 'Mr. Jholay', 'Ram Babu Gurung', 'Dayahang Rai', '', 'Comedy', '', 115, 'Nepal', 'A unknower (Dayahang Rai) acounters a lot of unknown stuff to him than he starts visit them with his friends while in the journey he starts to began a relationship.\r\n\r\n', 'https://m.media-amazon.com/images/M/MV5BMWYxMmNmMjMtZGRkNi00YmJlLTlhODItOWEwOWNlYzJkMDRiXkEyXkFqcGdeQXVyNTEwOTEzNDk@._V1_.jpg', '2018-01-12', 7.5, 85);
+(71, 'Mr. Jholay', 'Ram Babu Gurung', 'Dayahang Rai', '', 'Comedy', '', 115, 'Nepal', 'A unknower (Dayahang Rai) acounters a lot of unknown stuff to him than he starts visit them with his friends while in the journey he starts to began a relationship.\r\n\r\n', 'https://m.media-amazon.com/images/M/MV5BMWYxMmNmMjMtZGRkNi00YmJlLTlhODItOWEwOWNlYzJkMDRiXkEyXkFqcGdeQXVyNTEwOTEzNDk@._V1_.jpg', '2018-01-12', 7.5, 85),
+(72, 'The Social Network', 'David Fincher', 'Jesse Eisenberg', 'Andrew Garfield', 'Biography', 'Drama', 120, 'America', 'As Harvard student Mark Zuckerberg creates the social networking site that would become known as Facebook, he is sued by the twins who claimed he stole their idea, and by the co-founder who was later squeezed out of the business.', 'https://miro.medium.com/v2/resize:fit:712/1*stgfTdpOB56JoRePBapJCA.jpeg', '2010-10-01', 7.8, 765469),
+(76, 'Shutter Island', 'Martin Scorsese', 'Leonardo DiCaprio', 'Emily Mortimer', 'Mystery', 'Thriller', 138, 'USA', 'In 1954, a U.S. Marshal investigates the disappearance of a murderer who escaped from a hospital for the criminally insane.', 'https://i.pinimg.com/736x/ce/fa/19/cefa1998c89d4776b2a0c36f9c80c4a2.jpg', '2010-02-19', 8.2, 1475419),
+(77, 'Black Swan', 'Darren Aronofsky', 'Natalie Portman', 'Mila Kunis', 'Drama', 'Thriller', 108, 'USA', 'A committed dancer struggles to maintain her sanity after winning the lead role in a production of Tchaikovsky\'s \"Swan Lake\".', 'https://m.media-amazon.com/images/M/MV5BNzY2NzI4OTE5MF5BMl5BanBnXkFtZTcwMjMyNDY4Mw@@._V1_.jpg', '2010-12-17', 8.0, 700000),
+(78, 'The King\'s Speech', 'Tom Hooper', 'Colin Firth', 'Geoffrey Rush', 'Biography', 'Drama', 118, 'UK', 'The story of King George VI, his impromptu ascension to the throne of the British Empire in 1936, and the speech therapist who helped the unsure monarch overcome his stammer.', 'https://m.media-amazon.com/images/S/pv-target-images/5d198d58f2db33ee1814ce7509647ff1332e63cf3f8e24fb330dd0592ae37791.jpg', '2010-12-25', 8.0, 600000),
+(79, 'Harry Potter and the Deathly Hallows: Part 1', 'David Yates', 'Daniel Radcliffe', 'Emma Watson', 'Adventure', 'Fantasy', 146, 'UK', 'As Harry, Ron and Hermione race against time and evil to destroy the Horcruxes, they uncover the existence of the three most powerful objects in the wizarding world: the Deathly Hallows.', 'https://m.media-amazon.com/images/M/MV5BMTQ2OTE1Mjk0N15BMl5BanBnXkFtZTcwODE3MDAwNA@@._V1_.jpg', '2010-11-19', 7.7, 500000),
+(80, 'How to Train Your Dragon', 'Dean DeBlois, Chris Sanders', 'Jay Baruchel', 'Gerard Butler', 'Animation', 'Adventure', 98, 'USA', 'A hapless young Viking who aspires to hunt dragons becomes the unlikely friend of a young dragon himself, and learns there may be more to the creatures than he assumed.', 'https://m.media-amazon.com/images/M/MV5BMjIwMDIwNjAyOF5BMl5BanBnXkFtZTgwNDE1MDc2NTM@._V1_.jpg', '2010-03-26', 8.1, 700000),
+(81, 'True Grit', 'Ethan Coen, Joel Coen', 'Jeff Bridges', 'Matt Damon', 'Drama', 'Western', 110, 'USA', 'A stubborn teenager enlists the help of a tough U.S. Marshal to track down her father\'s murderer.', 'https://m.media-amazon.com/images/M/MV5BMTU5MjU3MTI4OF5BMl5BanBnXkFtZTcwMTQxOTAxNA@@._V1_FMjpg_UX1000_.jpg', '2010-12-22', 7.6, 300000),
+(82, 'The Fighter', 'David O. Russell', 'Mark Wahlberg', 'Christian Bale', 'Biography', 'Drama', 116, 'USA', 'A look at the early years of boxer Micky Ward and his brother who helped train him before going pro in the mid-1980s.', 'https://m.media-amazon.com/images/M/MV5BMTM0ODk3MjM1MV5BMl5BanBnXkFtZTcwNzc1MDIwNA@@._V1_.jpg', '2010-12-17', 7.8, 300000),
+(83, '127 Hours', 'Danny Boyle', 'James Franco', 'Amber Tamblyn', 'Biography', 'Drama', 94, 'USA', 'A mountain climber becomes trapped under a boulder while canyoneering alone near Moab, Utah and resorts to desperate measures in order to survive.', 'https://m.media-amazon.com/images/M/MV5BMTc2NjMzOTE3Ml5BMl5BanBnXkFtZTcwMDE0OTc5Mw@@._V1_.jpg', '2010-11-05', 7.6, 300000),
+(84, 'The Town', 'Ben Affleck', 'Ben Affleck', 'Rebecca Hall', 'Crime', 'Drama', 125, 'USA', 'A proficient group of thieves rob a bank and hold Claire, the assistant manager, hostage. Things begin to get complicated when one of the crew members falls in love with Claire.', 'https://m.media-amazon.com/images/M/MV5BZDNhMGY0M2EtYjViMS00NWQ1LWIxYjgtNDFjNzZiN2E2ODU4XkEyXkFqcGdeQXVyMjExMjk0ODk@._V1_FMjpg_UX1000_.jpg', '2010-09-17', 7.5, 400000),
+(85, 'Tangled', 'Nathan Greno, Byron Howard', 'Mandy Moore', 'Zachary Levi', 'Animation', 'Comedy', 100, 'USA', 'The magically long-haired Rapunzel has spent her entire life in a tower, but now that a runaway thief has stumbled upon her, she is about to discover the world for the first time, and who she really is.', 'https://m.media-amazon.com/images/I/91iZfoZkGXL._AC_UF894,1000_QL80_.jpg', '2010-11-24', 7.7, 400000),
+(86, 'Mad Max: Fury Road', 'George Miller', 'Tom Hardy', 'Charlize Theron', 'Action', 'Adventure', 120, 'Australia', 'In a post-apocalyptic wasteland, Max teams up with a group of rebels to overthrow a tyrannical leader.', 'https://m.media-amazon.com/images/M/MV5BN2EwM2I5OWMtMGQyMi00Zjg1LWJkNTctZTdjYTA4OGUwZjMyXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg', '2015-05-15', 8.1, 600000),
+(87, 'The Revenant', 'Alejandro G. Iñárritu', 'Leonardo DiCaprio', 'Tom Hardy', 'Action', 'Drama', 156, 'USA', 'A frontiersman on a quest for survival seeks revenge against those who left him for dead.', 'https://m.media-amazon.com/images/M/MV5BMDE5OWMzM2QtOTU2ZS00NzAyLWI2MDEtOTRlYjIxZGM0OWRjXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_FMjpg_UX1000_.jpg', '2015-12-25', 8.0, 450000),
+(88, 'Inside Out', 'Pete Docter', 'Amy Poehler', 'Phyllis Smith', 'Animation', 'Adventure', 95, 'USA', 'The emotions of a young girl are personified as characters trying to navigate her life during a major move.', 'https://m.media-amazon.com/images/M/MV5BOTgxMDQwMDk0OF5BMl5BanBnXkFtZTgwNjU5OTg2NDE@._V1_.jpg', '2015-06-19', 8.1, 200000),
+(89, 'Jurassic World', 'Colin Trevorrow', 'Chris Pratt', 'Bryce Dallas Howard', 'Action', 'Adventure', 124, 'USA', 'A new dinosaur theme park opens with genetically modified dinosaurs, leading to chaos when things go wrong.', 'https://m.media-amazon.com/images/M/MV5BNzIxMjYwNDEwN15BMl5BanBnXkFtZTgwMzk5MDI3NTM@._V1_FMjpg_UX1000_.jpg', '2015-06-12', 7.0, 450000),
+(90, 'Spectre', 'Sam Mendes', 'Daniel Craig', 'Christoph Waltz', 'Action', 'Adventure', 148, 'UK', 'James Bond uncovers a sinister organization while facing the man behind the organization.', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKBEgYFGK6vpCqEOv5AiYVLweeuAd8loexLg&s', '2015-11-06', 6.8, 300000),
+(91, 'The Martian', 'Ridley Scott', 'Matt Damon', 'Jessica Chastain', 'Adventure', 'Sci-Fi', 144, 'USA', 'An astronaut stranded on Mars must rely on his ingenuity to survive while awaiting rescue.', 'https://m.media-amazon.com/images/M/MV5BMTc2MTQ3MDA1Nl5BMl5BanBnXkFtZTgwODA3OTI4NjE@._V1_.jpg', '2015-10-02', 8.0, 500000),
+(92, 'The Big Short', 'Adam McKay', 'Christian Bale', 'Steve Carell', 'Biography', 'Drama', 130, 'USA', 'The story of the 2008 financial crisis through the eyes of those who saw it coming and bet against the market.', 'https://m.media-amazon.com/images/M/MV5BNDc4MThhN2EtZjMzNC00ZDJmLThiZTgtNThlY2UxZWMzNjdkXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_FMjpg_UX1000_.jpg', '2015-12-23', 7.8, 150000),
+(93, 'Star Wars: The Force Awakens', 'J.J. Abrams', 'Daisy Ridley', 'John Boyega', 'Action', 'Adventure', 138, 'USA', 'A new heroine emerges as the Resistance battles the dark forces of the First Order.', 'https://m.media-amazon.com/images/I/91xZGOnCFSL._AC_UF1000,1000_QL80_.jpg', '2015-12-18', 7.8, 800000),
+(94, 'Bridge of Spies', 'Steven Spielberg', 'Tom Hanks', 'Mark Rylance', 'Biography', 'Drama', 142, 'USA', 'The story of a lawyer who negotiates the exchange of spies during the Cold War.', 'https://m.media-amazon.com/images/M/MV5BMjIxOTI0MjU5NV5BMl5BanBnXkFtZTgwNzM4OTk4NTE@._V1_.jpg', '2015-10-16', 7.6, 100000),
+(95, 'Straight Outta Compton', 'F. Gary Gray', 'O\'Shea Jackson Jr.', 'Corey Hawkins', 'Biography', 'Drama', 147, 'USA', 'The rise and fall of the groundbreaking rap group N.W.A.', 'https://m.media-amazon.com/images/M/MV5BMTA5MzkyMzIxNjJeQTJeQWpwZ15BbWU4MDU0MDk0OTUx._V1_FMjpg_UX1000_.jpg', '2015-08-14', 7.8, 200000),
+(96, 'The Hateful Eight', 'Quentin Tarantino', 'Samuel L. Jackson', 'Kurt Russell', 'Crime', 'Drama', 187, 'USA', 'In post-Civil War Wyoming, a bounty hunter and his prisoner find themselves in a deadly standoff.', 'https://m.media-amazon.com/images/M/MV5BMjA1MTc1NTg5NV5BMl5BanBnXkFtZTgwOTM2MDEzNzE@._V1_.jpg', '2015-12-25', 7.8, 150000),
+(97, 'Room', 'Lenny Abrahamson', 'Brie Larson', 'Jacob Tremblay', 'Drama', 'Thriller', 118, 'Canada', 'A young boy and his mother, who have been held captive in a room for years, plan their escape.', 'https://i.pinimg.com/originals/a4/14/6e/a4146eb068cbe850ac23d3ba36cba452.png', '2015-10-23', 8.1, 100000),
+(98, 'The Danish Girl', 'Tom Hooper', 'Eddie Redmayne', 'Alicia Vikander', 'Biography', 'Drama', 120, 'UK', 'The story of Lili Elbe, one of the first known recipients of gender confirmation surgery.', 'https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p11822719_p_v8_al.jpg', '2015-11-27', 7.1, 70000),
+(99, 'The Jungle Book', 'Jon Favreau', 'Neel Sethi', 'Bill Murray', 'Adventure', 'Fantasy', 106, 'USA', 'A young boy raised by wolves in the jungle must return to human civilization.', 'https://m.media-amazon.com/images/M/MV5BMTc3NTUzNTI4MV5BMl5BanBnXkFtZTgwNjU0NjU5NzE@._V1_FMjpg_UX1000_.jpg', '2016-04-15', 7.4, 100000),
+(100, 'Goosebumps', 'Rob Letterman', 'Jack Black', 'Dylan Minnette', 'Adventure', 'Comedy', 103, 'USA', 'A teenager teams up with the daughter of the horror author R.L. Stine after the writer\'s creations come to life.', 'https://m.media-amazon.com/images/M/MV5BMjA1OTUzNTQ5Ml5BMl5BanBnXkFtZTgwODQ4NDkxNjE@._V1_.jpg', '2015-10-16', 6.3, 50000),
+(101, 'Steve Jobs', 'Danny Boyle', 'Michael Fassbender', 'Kate Winslet', 'Biography', 'Drama', 122, 'USA', 'The life of Apple Inc. co-founder Steve Jobs is portrayed through three key product launches.', 'https://m.media-amazon.com/images/S/pv-target-images/7e18d4cb0d70e430bd895eb969a01c53e7bdf8b41e4467e97b03f8f2df2c3522.jpg', '2015-10-23', 7.2, 75000),
+(102, 'The Walk', 'Robert Zemeckis', 'Joseph Gordon-Levitt', 'Charlotte Le Bon', 'Biography', 'Drama', 123, 'USA', 'The true story of Philippe Petit\'s high-wire walk between the Twin Towers in 1974.', 'https://m.media-amazon.com/images/I/91CZEi2kmRL._AC_UF894,1000_QL80_.jpg', '2015-09-30', 7.3, 40000),
+(103, 'Creed', 'Ryan Coogler', 'Michael B. Jordan', 'Sylvester Stallone', 'Drama', 'Sport', 133, 'USA', 'Adonis Johnson, the son of Apollo Creed, seeks out Rocky Balboa to train him for boxing.', 'https://m.media-amazon.com/images/M/MV5BNmZkYjQzY2QtNjdkNC00YjkzLTk5NjUtY2MyNDNiYTBhN2M2XkEyXkFqcGdeQXVyMjMwNDgzNjc@._V1_.jpg', '2015-11-25', 7.6, 85000),
+(104, 'The Gift', 'Joel Edgerton', 'Jason Bateman', 'Rebecca Hall', 'Drama', 'Thriller', 108, 'USA', 'A married couple\'s life is turned upside down when an acquaintance from the husband\'s past starts making unwanted visits.', 'https://m.media-amazon.com/images/M/MV5BNGFmY2UyMmYtNDY1Yi00NTIwLTk1ZDktOGM2OTQwZDk0NjU5XkEyXkFqcGdeQXVyMjQwMjk0NjI@._V1_.jpg', '2015-08-07', 7.0, 50000),
+(105, 'Burnt', 'John Wells', 'Bradley Cooper', 'Sienna Miller', 'Drama', 'Comedy', 101, 'USA', 'A chef with a complicated past works to redeem himself in the high-stakes culinary world.', 'https://m.media-amazon.com/images/M/MV5BNjEzNTk2OTEwNF5BMl5BanBnXkFtZTgwNzExMTg0NjE@._V1_FMjpg_UX1000_.jpg', '2015-10-23', 6.7, 30000),
+(106, 'The Witch', 'Robert Eggers', 'Anya Taylor-Joy', 'Ralph Ineson', 'Drama', 'Horror', 92, 'USA', 'A Puritan family in 1630s New England encounters forces of evil in the woods beyond their farm.', 'https://preview.redd.it/the-witch-2015-3400x5000-by-me-v0-dfmaog8ujldb1.jpg?width=1080&crop=smart&auto=webp&s=54539ba532b8dcc1b12741aa1023ae130a127c33', '2015-02-19', 6.9, 60000),
+(107, 'Sambodhan', 'Tulsi Ghimire', 'Rajesh Hamal', 'Jharana Thapa', 'Drama', 'Romance', 130, 'Nepal', 'A powerful drama highlighting the struggles of an aspiring individual.', 'https://m.media-amazon.com/images/M/MV5BZWM1NzkxYTAtNjAzMC00M2JiLTlmMmQtNjQwZDBjZWQyOTU4XkEyXkFqcGdeQXVyNTEwOTEzNDk@._V1_FMjpg_UX1000_.jpg', '1995-01-01', 8.0, 7000),
+(112, 'Kalo Pothi', 'Min Bahadur Bham', 'Chetan Gurung', 'Khagendra Lamichhane', 'Drama', 'Adventure', 90, 'Nepal', 'A touching story about two boys who embark on a journey to find a black hen.', 'https://m.media-amazon.com/images/M/MV5BOGQ2ZjRhM2QtMjAzMC00NzhhLThhODYtNTcwYjM3MWVjNzBmXkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_.jpg', '2015-11-15', 7.8, 6000),
+(113, 'Sano Sansar', 'Alok Nembang', 'Anmol K.C.', 'Swastima Khadka', 'Drama', 'Romance', 120, 'Nepal', 'A romantic drama exploring the complexities of modern relationships.', 'https://filmsofnepal.com/wp-content/uploads/2013/02/Sano-Sansar-poster-4.jpg', '2008-11-11', 7.5, 5000),
+(114, 'Gai Jatra', 'Prakash Subedi', 'Deepak Raj Giri', 'Jeetu Nepal', 'Comedy', 'Drama', 115, 'Nepal', 'A satirical comedy about societal issues and the traditional Gai Jatra festival.', 'https://m.media-amazon.com/images/M/MV5BMzE4YmNiNjQtNzgwZS00MDgxLWIzNjktNWRiZmRlMTY2ZWNiXkEyXkFqcGdeQXVyMjIxMTg1OTQ@._V1_.jpg', '2016-08-19', 7.9, 7000),
+(115, 'Bato Muni Ko Phool', 'Deepak Raj Giri', 'Deepak Raj Giri', 'Jeetu Nepal', 'Drama', 'Romance', 120, 'Nepal', 'A romantic drama that explores the relationship dynamics in rural Nepal.', 'https://m.media-amazon.com/images/M/MV5BODJmZjYxYmQtNjJlZS00M2Y0LThiOTYtYzIyOTQ2YTA2YjYxXkEyXkFqcGdeQXVyNTEwOTEzNDk@._V1_.jpg', '2017-12-29', 7.6, 6000),
+(116, 'Kavi', 'Yugal Gurung', 'Anmol K.C.', 'Swastima Khadka', 'Drama', 'Romance', 100, 'Nepal', 'A romantic drama exploring the emotional journey of a poet.', 'https://m.media-amazon.com/images/M/MV5BYWMwNjQ4YTgtYzU1Yy00ODg1LTkyY2EtNTFlMDQzZmNkNWQ3XkEyXkFqcGdeQXVyMjM1MzU3Mzc@._V1_.jpg', '2017-06-23', 7.8, 4000),
+(117, 'Shree 5 Ambare', 'Deepak Raj Giri', 'Deepak Raj Giri', 'Jeetu Nepal', 'Comedy', 'Drama', 120, 'Nepal', 'A comedy-drama following the misadventures of five friends.', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsWubdd2uuh63T932m5AZ0mRl47OiBmmFpSA&s', '2017-05-12', 8.2, 7000),
+(118, 'Dui Rupaiyan', 'Deepak Raj Giri', 'Deepak Raj Giri', 'Jeetu Nepal', 'Comedy', 'Drama', 105, 'Nepal', 'A comedy about two individuals struggling with their own issues while trying to make a living.', 'https://m.media-amazon.com/images/M/MV5BM2IwYjBlMzAtZmI2MC00NTI3LWFmOWQtZjZjZDA4MDAxZTUwXkEyXkFqcGdeQXVyNzkwNzg3MjU@._V1_.jpg', '2019-02-15', 7.9, 5000),
+(119, 'Chhakka Panja 2', 'Deepak Raj Giri', 'Deepak Raj Giri', 'Jeetu Nepal', 'Comedy', 'Drama', 127, 'Nepal', 'A sequel to the successful Chhakka Panja, filled with humor and drama.', 'https://m.media-amazon.com/images/M/MV5BNWRiM2NiMDctMDA5NC00ZWRjLWFlZDctYjcxZDZlNDA0ZWU1XkEyXkFqcGdeQXVyNzkwNzg3MjU@._V1_.jpg', '2017-09-08', 8.1, 7000),
+(120, 'Chhakka Panja 3', 'Deepak Raj Giri', 'Deepak Raj Giri', 'Jeetu Nepal', 'Comedy', 'Drama', 120, 'Nepal', 'The third installment in the Chhakka Panja series, continuing the hilarious adventures.', 'https://m.media-amazon.com/images/M/MV5BNDhiY2VjZGQtYTE0YS00ZThkLWJjZjgtNGExNGRkMjM0YzhkXkEyXkFqcGdeQXVyNzQ3NTY5MjE@._V1_.jpg', '2018-12-07', 8.3, 8000),
+(121, 'Gorkha Paltan', 'Anil Kumar', 'Anmol K.C.', 'Sanjay Lama', 'Action', 'Drama', 135, 'Nepal', 'An action-packed movie about the brave Gorkha soldiers and their sacrifices.', 'https://www.muncha.com/img/l34791.jpg', '2019-05-01', 7.6, 4000),
+(122, 'Lappan Chappan', 'Sanjay Lama', 'Anmol K.C.', 'Swastima Khadka', 'Comedy', 'Drama', 108, 'Nepal', 'A comedy-drama that revolves around local events and personal challenges.', 'https://m.media-amazon.com/images/M/MV5BYzk5MDAyYjYtOGEyMC00MWVhLWJlNjEtMmYwM2Y0MTRhYjJhXkEyXkFqcGdeQXVyNjc5Mjg4Nzc@._V1_.jpg', '2017-03-03', 7.9, 4000);
 
 -- --------------------------------------------------------
 
@@ -214,11 +259,8 @@ INSERT INTO `seenepoll` (`pollID`, `movieID`, `userID`, `user_rating`, `review_t
 (14, 1, 1, 10.0, 'Excellent Movie...', 'One of the finest films made in recent years. It\'s a poignant story about hope. Hope gets me. That\'s what makes a film like this more than a movie. It tells a lesson about life. Those are the films people talk about 50 or even 100 years from you. It\'s also a story for freedom. Freedom from isolation, from rule, from bigotry and hate.', 4),
 (15, 3, 1, 8.0, 'Nepali Best comedy Movie', 'Sacchai dami movie raicha, bipin dai ko acting babaal cha.', 2),
 (16, 5, 1, 5.0, 'Not bad...', 'Khasai ramro ta lagena, but still bich bich ma ramailo nai cha', 3),
-(17, 5, 9, 8.0, 'Mahabharat', 'It reminds me of my own hostel life yr. So nostalgic!!!', 2),
 (18, 5, 10, 7.0, 'Wowwww!!!', 'La sahi movie nikalni raicha yr... I love anmol kc, my life!!!\n', 1),
 (19, 1, 8, 6.0, 'awesome movie', 'i like this movie very much.. Loved the movie.\nrecommended for all', 3),
-(20, 1, 9, 8.0, 'babbal', 'loved it', 2),
-(21, 17, 13, 9.0, 'Babaal', 'dami movie cha, maile ni ei herera bank lootna gaako theye, aaile jail bata review garirachu', 1),
 (22, 1, 2, 9.0, 'Overwhelmingly Good!', 'I didnt expectec for the Morgan to play such an act that literally moves me from the inside. It is good on so many level... Most Recommended movie!', 1),
 (23, 6, 8, 9.0, 'great movie', '\nloved the movie\n', 3),
 (24, 3, 8, 9.0, 'babbal movie', 'i liked it', 1),
@@ -226,7 +268,9 @@ INSERT INTO `seenepoll` (`pollID`, `movieID`, `userID`, `user_rating`, `review_t
 (29, 6, 1, 9.0, 'Our EVIL Custom!', 'As much as I cherish this movie for its artistic excellence and emotional depth, I also find myself repulsed by the portrayal of the Sati practice, an abhorrent custom that once plagued our culture. This inhumane tradition, which coerced widows into self-immolation on their husband\'s funeral pyre, stands as a dark chapter in our history.\n\nI am profoundly grateful to Chandra Shumsher, whose progressive leadership led to the eradication of this evil practice in 1920. His efforts not only saved countless lives but also paved the way for a more humane and just society. This historical context enriches my appreciation for the film\'s narrative, reminding us of the importance of progress and the ongoing fight against oppressive traditions.', 1),
 (32, 69, 1, 1.0, '**** **** anmol ko **** ', 'yo muji **** khate **** jasto movie aaile samman dekheko chaina. **** anmol', 1),
 (33, 25, 1, 9.0, 'love', 'this movie is **** good!', 1),
-(34, 31, 1, 9.0, 'greatest mind twisting movie ever', 'from tarantino, this is the best movie ever seen.', 1);
+(34, 31, 1, 9.0, 'greatest mind twisting movie ever', 'from tarantino, this is the best movie ever seen.', 1),
+(35, 4, 2, 7.0, 'sample test', 'sample test 123', 2),
+(36, 4, 1, 5.0, 'test', 'test', 1);
 
 -- --------------------------------------------------------
 
@@ -256,11 +300,9 @@ INSERT INTO `userdata` (`userID`, `userName`, `email`, `favDish`, `userPassword`
 (6, 'hiten', 'hiten@gmail.com', 'chiya', '$2y$10$l0E2TFEbzOpT1Kg.BgWz0ukjSHtd5XsI9zLLrRNdAnAMV7.D0M.Wm', 0),
 (7, 'nepal', 'nepal@gmail.com', 'thukpa', '$2y$10$bCmZF8N/Mu33BOP9fT9Y4Oql6iiDak1X6DDqwv2KoPlM94bgshdhi', 0),
 (8, 'jagdish', 'jagadish660@gmail.com', 'momo', '$2y$10$FKa7jFf.3C.yNRz1D6ljluYRChH5xPfV/wBf8yxWSgtKfc00qobJi', 0),
-(9, 'Ajay', 'ajaydas@gmail.com', 'keema noodles', '$2y$10$noo/WEphd9PhTEwf2JXB9eDFod8sM5DJCHh.2dfG/un9IY/zJHycG', 0),
 (10, 'Dipesh', 'dipesh10@gmail.com', 'surya', '$2y$10$oyy5KuQtc2vCqUwltxBYx.nThjjeBoW/P9hLhtIA9AhAhq/tnus5u', 0),
 (11, 'yugpurush dhaka', 'yubraajdhakal7@gmail.com', 'mutton', '$2y$10$Cr7Po2fRPDWze.n48Tf9ieCdNwunuKc8y.dSmsTN988eL54OqFEkG', 0),
-(12, 'jaynepal', 'nepali@gmail.com', 'massu', '$2y$10$KFNlXs4gNCS/s0ZZrqlHneaXaJprCRwiG.gR4rIgLx/EV6/tQH4am', 0),
-(13, 'Sangat', 'sangat@gmail.com', 'raksi', '$2y$10$mmJ/Lkilt4IOVNUV5uhuuuXk/XZ/CK382voCO5FwXkvaKGzeqiEEu', 0);
+(12, 'jaynepal', 'nepali@gmail.com', 'massu', '$2y$10$KFNlXs4gNCS/s0ZZrqlHneaXaJprCRwiG.gR4rIgLx/EV6/tQH4am', 0);
 
 --
 -- Indexes for dumped tables
@@ -324,25 +366,25 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `commentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `commentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `favoriteID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `favoriteID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `movieID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `movieID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `seenepoll`
 --
 ALTER TABLE `seenepoll`
-  MODIFY `pollID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `pollID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `userdata`

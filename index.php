@@ -41,7 +41,7 @@ session_start();
         <button class="navbar-toggler btn btn-success" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <div class="collapse navbar-collapse justify-content-center align-items-center" id="navbarSupportedContent">
             <ul class="navbar-nav justify-content-start align-items-start mx-2">
                 <button class="curved-button" title="Home" id="homeButton"><i class="fas fa-home"></i></button>
@@ -178,7 +178,7 @@ session_start();
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
         </a>
     </div>
-    <main class="container-fluid">
+    <main class="container-fluid mt-4">
         <!--For Movie Cards Display-->
         <div class="movie-container d-flex justify-content-center flex-wrap"></div>
         <!--For Pagination Display-->

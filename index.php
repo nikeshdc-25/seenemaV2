@@ -34,8 +34,8 @@ session_start();
 
 <body id="top">
     <header class="d-flex align-items-center justify-content-left logo-container">
-        <img src="./seenema_img/seenemaLogo.png" alt="Seenema Logo" class="me-2">
-        <a href="#" class="seenemaTxt">SEENEMA</a>
+        l<a href="/seenema"><img src="./seenema_img/seenemaLogo.png" alt="Seenema Logo" class="me-2"></a>
+        <a href="/seenema" class="seenemaTxt">SEENEMA</a>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light button-container justify-content-between">
         <button class="navbar-toggler btn btn-success" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
